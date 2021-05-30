@@ -3,10 +3,11 @@ const axios = require('axios').default;
 const cheerio = require('cheerio');
 
 const logger = require('../logger');
+const { arrayIndexString } = require('../utils');
 const getAirports = require('../getAirports');
 const saveLink = require('../saveLink');
 
-const aipURL = 'https://eaip.austrocontrol.at/lo/210226'
+const aipURL = 'https://eaip.austrocontrol.at/lo/210521'
 const api = axios.create({
   baseURL: aipURL,
   timeout: 10000,
@@ -21,17 +22,14 @@ async function getChart($, icao) {
   try {
     const lnk = $(`a[href="ad_2_${icao.toLowerCase()}.htm"]`).attr('href')
     if (!lnk) throw new Error('Not Found');
-    logger.info(`(${icao}) ${aipURL}/${lnk}`);
-
     return `${aipURL}/${lnk}`
   } catch (error) {
-    logger.error(`(${icao}) ${error}`);
     return 'error';
   }
 }
 
 module.exports = async () => {
-  logger.debug(`AUSTRIA`);
+  logger.debug(`AUSTRIA`, { type: 'general' });
   let aipRes = await api.get(`/ad_2.htm`);
   let $ = cheerio.load(aipRes.data);
 
@@ -41,14 +39,19 @@ module.exports = async () => {
 
   for (let i = 0; i < airports.length; i++) {
     const res = await getChart($, airports[i])
+
     if (res !== 'error') {
       chartLinks.push({ icao: airports[i], link: res });
+      logger.info(`${arrayIndexString(i, airports)} (${airports[i]}) ${res}`, { type: 'web' });
+    } else {
+      logger.error(`${arrayIndexString(i, airports)} (${airports[i]}) ${res}`, { type: 'web' });
     }
   }
 
   for (let i = 0; i < chartLinks.length; i++) {
     await saveLink(chartLinks[i])
+    logger.info(`${arrayIndexString(i, chartLinks)} (${chartLinks[i].icao}) Saved to database`, { type: 'database' });
   }
 
-  logger.debug('AUSTRIA DONE!');
+  logger.debug('AUSTRIA DONE!', { type: 'general' });
 }

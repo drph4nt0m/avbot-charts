@@ -3,6 +3,7 @@ const axios = require('axios').default;
 const cheerio = require('cheerio');
 
 const logger = require('../logger');
+const { arrayIndexString } = require('../utils');
 const getAirports = require('../getAirports');
 const saveLink = require('../saveLink');
 
@@ -21,26 +22,23 @@ async function getChart($, icao) {
   try {
     const lnk = $(`a[title="${icao}"]`).attr('href')
     if (!lnk) throw new Error('Not Found');
-    logger.info(`(${icao}) ${aipURL}/eAIP/${lnk.replaceAll(' ', '%20')}`);
-
     return `${aipURL}/eAIP/${lnk.replaceAll(' ', '%20')}`
   } catch (error) {
-    logger.error(`(${icao}) ${error}`);
     return 'error';
   }
 }
 
 module.exports = async () => {
-  logger.debug(`INDIA`);
+  logger.debug(`INDIA`, { type: 'general' });
   let aipRes = await api.get(`/index-en-GB.html`);
   let $ = cheerio.load(aipRes.data);
   let lnk = $(`frame[name="eAISNavigationBase"]`).attr('src')
-  logger.info(`${aipURL}/${lnk}`);
+  logger.info(`${aipURL}/${lnk}`, { type: 'web' });
 
   aipRes = await api.get(`/${lnk}`)
   $ = cheerio.load(aipRes.data);
   lnk = $(`frame[name="eAISNavigation"]`).attr('src')
-  logger.info(`${aipURL}/${lnk}`);
+  logger.info(`${aipURL}/${lnk}`, { type: 'web' });
 
   aipRes = await api.get(`/${lnk}`)
   $ = cheerio.load(aipRes.data);
@@ -53,12 +51,15 @@ module.exports = async () => {
     const res = await getChart($, airports[i])
     if (res !== 'error') {
       chartLinks.push({ icao: airports[i], link: res });
-    }
-  }
+      logger.info(`${arrayIndexString(i, airports)} (${airports[i]}) ${res}`, { type: 'web' });
+    } else {
+      logger.error(`${arrayIndexString(i, airports)} (${airports[i]}) ${res}`, { type: 'web' });
+    }  }
 
   for (let i = 0; i < chartLinks.length; i++) {
     await saveLink(chartLinks[i])
+    logger.info(`${arrayIndexString(i, chartLinks)} (${chartLinks[i].icao}) Saved to database`, { type: 'database' });
   }
 
-  logger.debug('INDIA DONE!');
+  logger.debug('INDIA DONE!', { type: 'general' });
 }

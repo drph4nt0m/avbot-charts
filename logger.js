@@ -20,8 +20,15 @@ const myFormat = printf(({
   level,
   message,
   timestamp,
+  type,
   ...metadata
 }) => {
+  let icon = '⚡';
+  if (type === 'web') {
+    icon = '🌐';
+  } else if (type === 'database') {
+    icon = '📓'
+  }
   if (level === 'info') {
     message = info(`[+] ${message}`)
   } else if (level === 'error') {
@@ -31,7 +38,7 @@ const myFormat = printf(({
   } else {
     message = `[ ] ${message}`
   }
-  let msg = `⚡ ${timestamp} ${message}`;
+  let msg = `${icon} ${timestamp} ${message}`;
   if (metadata && JSON.stringify(metadata) != '{}') {
     msg += JSON.stringify(metadata);
   }

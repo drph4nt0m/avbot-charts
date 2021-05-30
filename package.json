@@ -1,0 +1,25 @@
+{
+  "name": "avbot-charts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "nodemon main.js",
+    "start": "node main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "chalk": "^3.0.0",
+    "cheerio": "^1.0.0-rc.5",
+    "csv-parse": "^4.15.3",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.11.19",
+    "puppeteer": "^8.0.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

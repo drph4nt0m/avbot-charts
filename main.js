@@ -19,8 +19,8 @@ async function updateLinks() {
   logger.debug('Updating links...');
   // await Australia();
   // await Austria();
-  await Bahrain();
-  // await Belgium();
+  // await Bahrain();
+  await Belgium();
   // await Croatia();
   // await India();
   // await Israel();

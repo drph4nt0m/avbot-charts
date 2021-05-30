@@ -21,9 +21,11 @@ async function getChart(headings, icao) {
   try {
 
     if (!headings.match(icao)) throw new Error('Not Found');
-    logger.info(`(${icao}) ${aipURL}`);
 
-    return aipURL
+    const chartUrl = `${aipURL}#:~:text=${icao}`
+    logger.info(`(${icao}) ${chartUrl}`);
+
+    return chartUrl
   } catch (error) {
     logger.error(`(${icao}) ${error}`);
     return 'error';
@@ -46,6 +48,8 @@ module.exports = async () => {
       chartLinks.push({ icao: airports[i], link: res });
     }
   }
+
+  console.log(chartLinks);
 
   for (let i = 0; i < chartLinks.length; i++) {
     await saveLink(chartLinks[i])

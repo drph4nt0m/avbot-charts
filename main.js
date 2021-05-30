@@ -18,8 +18,8 @@ const SouthKorea = require('./countries/SouthKorea');
 async function updateLinks() {
   logger.debug('Updating links...');
   // await Australia();
-  await Austria();
-  // await Bahrain();
+  // await Austria();
+  await Bahrain();
   // await Belgium();
   // await Croatia();
   // await India();

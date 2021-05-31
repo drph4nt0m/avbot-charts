@@ -23,8 +23,8 @@ async function updateLinks() {
   // await Belgium();
   // await Croatia();
   // await India();
-  await Israel();
-  // await Kuwait();
+  // await Israel();
+  await Kuwait();
   // await Luxembourg();
   // await Mongolia();
   // await Qatar();

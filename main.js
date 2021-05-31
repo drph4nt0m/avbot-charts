@@ -27,7 +27,7 @@ async function updateLinks() {
   // await Kuwait();
   // await Luxembourg();
   // await Mongolia();
-  await Qatar();
+  // await Qatar();
   // await SouthKorea();
   logger.debug('Updated links.');
 }

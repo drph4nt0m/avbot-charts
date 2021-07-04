@@ -7,7 +7,10 @@ const { arrayIndexString } = require('../utils');
 const getAirports = require('../getAirports');
 const saveLink = require('../saveLink');
 
-const aipURL = 'https://www.airservicesaustralia.com/aip/current/dap/AeroProcChartsTOC.htm'
+const countryCode = 'AU';
+
+const aipURL = require('../aips')[countryCode];
+
 const api = axios.create({
   baseURL: aipURL,
   timeout: 10000,
@@ -28,12 +31,12 @@ async function getChart(headings, icao) {
 }
 
 module.exports = async () => {
-  logger.debug(`AUSTRALIA`, { type: 'general' });
+  logger.debug(`${countryCode}`, { type: 'general' });
   let aipRes = await api.get();
   let $ = cheerio.load(aipRes.data);
   let headings = $(`h3[style="text-align:left"]`).text()
 
-  const airports = getAirports('AU');
+  const airports = getAirports(countryCode);
 
   const chartLinks = []
 
@@ -53,5 +56,5 @@ module.exports = async () => {
     logger.info(`${arrayIndexString(i, chartLinks)} (${chartLinks[i].icao}) Saved to database`, { type: 'database' });
   }
 
-  logger.debug('AUSTRALIA DONE!', { type: 'general' });
+  logger.debug(`${countryCode} DONE!`, { type: 'general' });
 }

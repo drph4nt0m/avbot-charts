@@ -7,7 +7,10 @@ const { arrayIndexString } = require('../utils');
 const getAirports = require('../getAirports');
 const saveLink = require('../saveLink');
 
-const aipURL = 'https://www.aim.gov.qa/eaip/2021-03-25-AIRAC/html'
+const countryCode = 'AT';
+
+const aipURL = require('../aips')[countryCode];
+
 const api = axios.create({
   baseURL: aipURL,
   timeout: 10000,
@@ -20,36 +23,26 @@ const api = axios.create({
 
 async function getChart($, icao) {
   try {
-    const lnk = $(`a[id="AD-2.${icao}"]`).attr('href')
+    const lnk = $(`a[href="ad_2_${icao.toLowerCase()}.htm"]`).attr('href')
     if (!lnk) throw new Error('Not Found');
-    return `${aipURL}/eAIP/${lnk}`
+    return `${aipURL}/${lnk}`
   } catch (error) {
     return 'error';
   }
 }
 
 module.exports = async () => {
-  logger.debug(`QATAR`, { type: 'general' });
-
-  let aipRes = await api.get(`/index-en-GB.html`);
+  logger.debug(`${countryCode}`, { type: 'general' });
+  let aipRes = await api.get(`/ad_2.htm`);
   let $ = cheerio.load(aipRes.data);
-  let lnk = $(`frame[name="eAISNavigationBase"]`).attr('src')
-  logger.info(`${aipURL}/${lnk}`, { type: 'web' });
 
-  aipRes = await api.get(`/${lnk}`)
-  $ = cheerio.load(aipRes.data);
-  lnk = $(`frame[name="eAISNavigation"]`).attr('src')
-  logger.info(`${aipURL}/${lnk}`, { type: 'web' });
-
-  aipRes = await api.get(`/${lnk}`)
-  $ = cheerio.load(aipRes.data);
-
-  const airports = getAirports('QA');
+  const airports = getAirports(countryCode);
 
   const chartLinks = []
 
   for (let i = 0; i < airports.length; i++) {
     const res = await getChart($, airports[i])
+
     if (res !== 'error') {
       chartLinks.push({ icao: airports[i], link: res });
       logger.info(`${arrayIndexString(i, airports)} (${airports[i]}) ${res}`, { type: 'web' });
@@ -63,5 +56,5 @@ module.exports = async () => {
     logger.info(`${arrayIndexString(i, chartLinks)} (${chartLinks[i].icao}) Saved to database`, { type: 'database' });
   }
 
-  logger.debug('QATAR DONE!', { type: 'general' });
+  logger.debug(`${countryCode} DONE!`, { type: 'general' });
 }

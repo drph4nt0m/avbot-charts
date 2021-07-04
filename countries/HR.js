@@ -7,7 +7,10 @@ const { arrayIndexString } = require('../utils');
 const getAirports = require('../getAirports');
 const saveLink = require('../saveLink');
 
-const aipURL = 'https://ops.skeyes.be/html/belgocontrol_static/eaip/eAIP_Main/html'
+const countryCode = 'HR';
+
+const aipURL = require('../aips')[countryCode];
+
 const api = axios.create({
   baseURL: aipURL,
   timeout: 10000,
@@ -29,9 +32,8 @@ async function getChart($, icao) {
 }
 
 module.exports = async () => {
-  logger.debug(`LUXEMBOURG`, { type: 'general' });
-
-  let aipRes = await api.get(`/index-en-GB.html`);
+  logger.debug(`${countryCode}`, { type: 'general' });
+  let aipRes = await api.get(`/index-en-HR.html`);
   let $ = cheerio.load(aipRes.data);
   let lnk = $(`frame[name="eAISNavigation"]`).attr('src')
   logger.info(`${aipURL}/${lnk}`, { type: 'web' });
@@ -39,7 +41,7 @@ module.exports = async () => {
   aipRes = await api.get(`/${lnk}`)
   $ = cheerio.load(aipRes.data);
 
-  const airports = getAirports('LU');
+  const airports = getAirports(countryCode);
 
   const chartLinks = []
 
@@ -58,5 +60,5 @@ module.exports = async () => {
     logger.info(`${arrayIndexString(i, chartLinks)} (${chartLinks[i].icao}) Saved to database`, { type: 'database' });
   }
 
-  logger.debug('LUXEMBOURG DONE!', { type: 'general' });
+  logger.debug(`${countryCode} DONE!`, { type: 'general' });
 }

@@ -7,7 +7,10 @@ const { arrayIndexString } = require('../utils');
 const getAirports = require('../getAirports');
 const saveLink = require('../saveLink');
 
-const aipURL = 'https://ops.skeyes.be/html/belgocontrol_static/eaip/eAIP_Main/html'
+const countryCode = 'QA';
+
+const aipURL = require('../aips')[countryCode];
+
 const api = axios.create({
   baseURL: aipURL,
   timeout: 10000,
@@ -29,17 +32,22 @@ async function getChart($, icao) {
 }
 
 module.exports = async () => {
-  logger.debug(`BELGIUM`, { type: 'general' });
+  logger.debug(`${countryCode}`, { type: 'general' });
 
   let aipRes = await api.get(`/index-en-GB.html`);
   let $ = cheerio.load(aipRes.data);
-  let lnk = $(`frame[name="eAISNavigation"]`).attr('src')
+  let lnk = $(`frame[name="eAISNavigationBase"]`).attr('src')
+  logger.info(`${aipURL}/${lnk}`, { type: 'web' });
+
+  aipRes = await api.get(`/${lnk}`)
+  $ = cheerio.load(aipRes.data);
+  lnk = $(`frame[name="eAISNavigation"]`).attr('src')
   logger.info(`${aipURL}/${lnk}`, { type: 'web' });
 
   aipRes = await api.get(`/${lnk}`)
   $ = cheerio.load(aipRes.data);
 
-  const airports = getAirports('BE');
+  const airports = getAirports(countryCode);
 
   const chartLinks = []
 
@@ -58,5 +66,5 @@ module.exports = async () => {
     logger.info(`${arrayIndexString(i, chartLinks)} (${chartLinks[i].icao}) Saved to database`, { type: 'database' });
   }
 
-  logger.debug('BELGIUM DONE!', { type: 'general' });
+  logger.debug(`${countryCode} DONE!`, { type: 'general' });
 }

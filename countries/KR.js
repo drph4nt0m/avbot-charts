@@ -1,6 +1,5 @@
 const https = require('https');
 const axios = require('axios').default;
-const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
 
 const logger = require('../logger');
@@ -8,7 +7,10 @@ const { arrayIndexString } = require('../utils');
 const getAirports = require('../getAirports');
 const saveLink = require('../saveLink');
 
-const aipURL = 'https://dgca.gov.kw/AIP'
+const countryCode = 'KR';
+
+const aipURL = require('../aips')[countryCode];
+
 const api = axios.create({
   baseURL: aipURL,
   timeout: 10000,
@@ -19,27 +21,38 @@ const api = axios.create({
   }
 });
 
-async function getChart(headings, icao) {
+async function getChart($, icao) {
   try {
-    if (!headings.match(icao)) throw new Error('Not Found');
-    return `${aipURL}#:~:text=${icao}`
+    const lnk = $(`a[id="AD-2.${icao}"]`).attr('href')
+    if (!lnk) throw new Error('Not Found');
+    return `${aipURL}/eAIP/${lnk}`
   } catch (error) {
     return 'error';
   }
 }
 
 module.exports = async () => {
-  logger.debug(`KUWAIT`, { type: 'general' });
-  let aipRes = await api.get();
-  let $ = cheerio.load(aipRes.data);
-  let headings = $(`p.mb-0`).text()
+  logger.debug(`${countryCode}`, { type: 'general' });
 
-  const airports = getAirports('KW');
+  let aipRes = await api.get(`/index-en-GB.html`);
+  let $ = cheerio.load(aipRes.data);
+  let lnk = $(`frame[name="eAISNavigationBase"]`).attr('src')
+  logger.info(`${aipURL}/${lnk}`, { type: 'web' });
+
+  aipRes = await api.get(`/${lnk}`)
+  $ = cheerio.load(aipRes.data);
+  lnk = $(`frame[name="eAISNavigation"]`).attr('src')
+  logger.info(`${aipURL}/${lnk}`, { type: 'web' });
+
+  aipRes = await api.get(`/${lnk}`)
+  $ = cheerio.load(aipRes.data);
+
+  const airports = getAirports(countryCode);
 
   const chartLinks = []
 
   for (let i = 0; i < airports.length; i++) {
-    const res = await getChart(headings, airports[i])
+    const res = await getChart($, airports[i])
     if (res !== 'error') {
       chartLinks.push({ icao: airports[i], link: res });
       logger.info(`${arrayIndexString(i, airports)} (${airports[i]}) ${res}`, { type: 'web' });
@@ -53,5 +66,5 @@ module.exports = async () => {
     logger.info(`${arrayIndexString(i, chartLinks)} (${chartLinks[i].icao}) Saved to database`, { type: 'database' });
   }
 
-  logger.debug('KUWAIT DONE!', { type: 'general' });
+  logger.debug(`${countryCode} DONE!`, { type: 'general' });
 }

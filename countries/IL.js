@@ -8,7 +8,9 @@ const { arrayIndexString } = require('../utils');
 const getAirports = require('../getAirports');
 const saveLink = require('../saveLink');
 
-const aipURL = 'https://www.gov.il/en/Departments/Guides/aip-israel?chapterIndex=7'
+const countryCode = 'IL';
+
+const aipURL = require('../aips')[countryCode];
 
 async function getChart(headings, icao) {
   try {
@@ -20,7 +22,7 @@ async function getChart(headings, icao) {
 }
 
 module.exports = async () => {
-  logger.debug(`ISRAEL`, { type: 'general' });
+  logger.debug(`${countryCode}`, { type: 'general' });
   const browser = await puppeteer.launch({ headless: true });
   logger.info(`Opened headless browser`, { type: 'web' });
 
@@ -40,7 +42,7 @@ module.exports = async () => {
   let $ = cheerio.load(aipRes);
   let headings = $(`h2 > a > span`).text()
 
-  const airports = getAirports('IL');
+  const airports = getAirports(countryCode);
 
   const chartLinks = []
 
@@ -59,5 +61,5 @@ module.exports = async () => {
     logger.info(`${arrayIndexString(i, chartLinks)} (${chartLinks[i].icao}) Saved to database`, { type: 'database' });
   }
 
-  logger.debug('ISRAEL DONE!', { type: 'general' });
+  logger.debug(`${countryCode} DONE!`, { type: 'general' });
 }

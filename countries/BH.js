@@ -7,7 +7,10 @@ const { arrayIndexString } = require('../utils');
 const getAirports = require('../getAirports');
 const saveLink = require('../saveLink');
 
-const aipURL = 'http://www.bahrainaims.com/eAIP/april12021Publications/2021-04-22-AIRAC/html'
+const countryCode = 'BH';
+
+const aipURL = require('../aips')[countryCode];
+
 const api = axios.create({
   baseURL: aipURL,
   timeout: 10000,
@@ -29,7 +32,7 @@ async function getChart($, icao) {
 }
 
 module.exports = async () => {
-  logger.debug(`BAHRAIN`, { type: 'general' });
+  logger.debug(`${countryCode}`, { type: 'general' });
   let aipRes = await api.get(`/index-en-BH.html`);
   let $ = cheerio.load(aipRes.data);
   let lnk = $(`frame[name="eAISNavigationBase"]`).attr('src')
@@ -43,7 +46,7 @@ module.exports = async () => {
   aipRes = await api.get(`/${lnk}`)
   $ = cheerio.load(aipRes.data);
 
-  const airports = getAirports('BH');
+  const airports = getAirports(countryCode);
 
   const chartLinks = []
 
@@ -62,5 +65,5 @@ module.exports = async () => {
     logger.info(`${arrayIndexString(i, chartLinks)} (${chartLinks[i].icao}) Saved to database`, { type: 'database' });
   }
 
-  logger.debug('BAHRAIN DONE!', { type: 'general' });
+  logger.debug(`${countryCode} DONE!`, { type: 'general' });
 }

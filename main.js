@@ -1,24 +1,65 @@
 require('dotenv').config()
+const commander = require('commander');
+const fs = require('fs');
 
 const logger = require('./logger');
+const getAirportsByCountry = require('./getAirportsByCountry');
+const getAirport = require('./getAirport');
+const getCharts = require('./getCharts');
 
-async function updateLinks() {
-  logger.debug('Updating links...');
+commander.program
+  .option('--icao [ICAO_CODE]', 'Scrape only one specific airport by airport ICAO code')
+  .option('--country [ISO_CODE]', 'Scrape all airports in one specific country by country ISO code')
+  .parse(process.argv);
 
-  await require('./countries/AT')();
-  await require('./countries/AU')();
-  await require('./countries/BE')();
-  await require('./countries/BH')();
-  await require('./countries/HR')();
-  await require('./countries/IL')();
-  await require('./countries/IN')();
-  await require('./countries/KR')();
-  await require('./countries/KW')();
-  await require('./countries/LU')();
-  await require('./countries/MN')();
-  await require('./countries/QA')();
+const options = commander.program.opts();
 
-  logger.debug('Updated links.');
+async function main() {
+  logger.debug(process.argv.join(' '), { type: 'general' });
+
+  logger.debug('Updating links', { type: 'general' });
+
+  const playbooks_dir = './playbooks';
+
+  if (options.icao) {
+    const airport = getAirport(options.icao);
+    let playbook = null;
+    try {
+      const _playbook = fs.readFileSync(`${playbooks_dir}/${airport.iso_country}.json`, 'utf8');
+      playbook = JSON.parse(_playbook);
+    } catch (error) {
+      logger.error(`Playbook for ${airport.iso_country} not found`, { type: 'general' });
+      logger.error(error);
+    }
+    if (playbook) {
+      await getCharts(playbook, [airport]);
+    }
+  } else if (options.country) {
+    const airports = getAirportsByCountry(options.country);
+    let playbook = null;
+    try {
+      const _playbook = fs.readFileSync(`${playbooks_dir}/${options.country}.json`, 'utf8');
+      playbook = JSON.parse(_playbook);
+    } catch (error) {
+      logger.error(`Playbook for ${options.country} not found`, { type: 'general' });
+      logger.error(error);
+    }
+    if (playbook) {
+      await getCharts(playbook, airports);
+    }
+  } else {
+    const playbooks = fs.readdirSync(playbooks_dir);
+
+    for (const _ of playbooks) {
+      const _playbook = fs.readFileSync(`${playbooks_dir}/${_}`, 'utf8');
+      const playbook = JSON.parse(_playbook);
+      const airports = getAirportsByCountry(playbook.country.iso);
+      await getCharts(playbook, airports);
+    }
+  }
+
+
+  logger.debug('Updated links', { type: 'general' });
 }
 
-updateLinks();
+main();

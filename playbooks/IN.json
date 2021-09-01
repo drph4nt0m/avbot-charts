@@ -1,0 +1,33 @@
+{
+  "country": {
+    "iso": "IN",
+    "name": "India"
+  },
+  "source": "Airports Authority of India",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://aim-india.aai.aero/eaip-v2-02-2021",
+      "paths": [
+        {
+          "route": "/index-en-GB.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAISNavigationBase\"]",
+              "attribute": "src"
+            },
+            {
+              "selector": "frame[name=\"eAISNavigation\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[title=\"${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

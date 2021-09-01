@@ -1,0 +1,22 @@
+{
+  "country": {
+    "iso": "US",
+    "name": "United States"
+  },
+  "source": "Federal Aviation Administration",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://nfdc.faa.gov",
+      "paths": [
+        {
+          "route": "/nfdcApps/services/ajv5/airportDisplay.jsp?airportId=${icao}#charts"
+        }
+      ],
+      "not_found": {
+        "selector": "body > div.container-fluid > div:nth-child(2) > div > div.alert.alert-warning > strong",
+        "content": "Airport Not Found."
+      }
+    }
+  }
+}

@@ -1,4 +1,8 @@
 const chalk = require('chalk');
+const dayjs = require('dayjs');
+const utc = require('dayjs/plugin/utc');
+dayjs.extend(utc);
+
 const {
   createLogger,
   format,
@@ -33,7 +37,7 @@ const myFormat = printf(({
     message = info(`[+] ${message}`)
   } else if (level === 'error') {
     message = error(`[-] ${message}`)
-  } else if(level === 'debug') {
+  } else if (level === 'debug') {
     message = debug(`[*] ${message}`)
   } else {
     message = `[ ] ${message}`
@@ -55,7 +59,7 @@ const logger = createLogger({
   transports: [
     new transports.Console(),
     new transports.File({
-      filename: 'combined.log'
+      filename: `./log/${dayjs.utc().format('YYYY_MM_DD_HH_mm_ss')}.log`
     })
   ]
 });

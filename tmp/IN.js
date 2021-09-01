@@ -57,7 +57,8 @@ module.exports = async () => {
       logger.info(`${arrayIndexString(i, airports)} (${airports[i]}) ${res}`, { type: 'web' });
     } else {
       logger.error(`${arrayIndexString(i, airports)} (${airports[i]}) ${res}`, { type: 'web' });
-    }  }
+    }
+  }
 
   for (let i = 0; i < chartLinks.length; i++) {
     await saveLink(chartLinks[i])

@@ -6,8 +6,6 @@ try {
   mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
   })
   logger.debug(`MongoDB Connected`);
 } catch (error) {
@@ -17,7 +15,9 @@ try {
 const ChartSchema = new mongoose.Schema(
   {
     icao: { type: String, required: true, unique: true },
-    link: { type: String, required: true }
+    link: { type: String, required: true },
+    source: { type: String, required: true },
+    country: { type: String, required: true },
   },
   { timestamps: true }
 )

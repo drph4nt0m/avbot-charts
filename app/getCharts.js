@@ -7,7 +7,7 @@ const logger = require('./logger');
 module.exports = async (playbook, airports, debug = false) => {
   logger.debug(`Starting ${playbook.country.name}`, { type: 'general' });
 
-  for (let i = 0; i < airports.length; i++) {
+  for (let i = 0; i < airports.length; i += 1) {
     const airport = airports[i];
     const res = await getChart(playbook, airport.ident);
     if (res !== 'error') {
@@ -21,4 +21,4 @@ module.exports = async (playbook, airports, debug = false) => {
   }
 
   logger.debug(`Completed ${playbook.country.name}`, { type: 'general' });
-}
+};

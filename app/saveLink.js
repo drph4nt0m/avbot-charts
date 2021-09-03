@@ -25,5 +25,11 @@ const ChartSchema = new mongoose.Schema(
 const model = mongoose.model('chart', ChartSchema)
 
 module.exports = async (airport) => {
-  await model.updateOne({ icao: airport.icao }, airport, { upsert: true });
+  try {
+    await model.updateOne({ icao: airport.icao }, airport, { upsert: true });
+    logger.info(`(${airport.icao}) Updated chart`, { type: 'database' });
+  } catch (error) {
+    logger.error(`(${airport.icao}) unable to update chart`, { type: 'database' });
+    logger.error(error);
+  }
 }

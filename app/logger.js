@@ -59,7 +59,7 @@ const logger = createLogger({
   transports: [
     new transports.Console(),
     new transports.File({
-      filename: `./log/${dayjs.utc().format('YYYY_MM_DD_HH_mm_ss')}.log`
+      filename: `${process.cwd()}/log/${dayjs.utc().format('YYYY_MM_DD_HH_mm_ss')}.log`
     })
   ]
 });

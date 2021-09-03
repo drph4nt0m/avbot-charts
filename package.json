@@ -2,10 +2,11 @@
   "name": "avbot-charts",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "app/main.js",
   "scripts": {
-    "dev": "nodemon main.js",
-    "start": "node main.js"
+    "dev": "nodemon app/main.js",
+    "start": "node app/main.js",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +24,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "jest": "^27.1.0",
     "nodemon": "^2.0.12"
   }
 }

@@ -19,7 +19,7 @@ async function main() {
 
   logger.debug('Updating links', { type: 'general' });
 
-  const playbooks_dir = './playbooks';
+  const playbooks_dir = `${process.cwd()}/playbooks`;
 
   if (options.icao) {
     const airport = getAirport(options.icao);
@@ -32,7 +32,7 @@ async function main() {
       logger.error(error);
     }
     if (playbook) {
-      await getCharts(playbook, [airport]);
+      await getCharts(playbook, [airport], false);
     }
   } else if (options.country) {
     const airports = getAirportsByCountry(options.country);
@@ -45,7 +45,7 @@ async function main() {
       logger.error(error);
     }
     if (playbook) {
-      await getCharts(playbook, airports);
+      await getCharts(playbook, airports, false);
     }
   } else {
     const playbooks = fs.readdirSync(playbooks_dir);
@@ -54,7 +54,7 @@ async function main() {
       const _playbook = fs.readFileSync(`${playbooks_dir}/${_}`, 'utf8');
       const playbook = JSON.parse(_playbook);
       const airports = getAirportsByCountry(playbook.country.iso);
-      await getCharts(playbook, airports);
+      await getCharts(playbook, airports, false);
     }
   }
 

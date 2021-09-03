@@ -20,7 +20,7 @@ module.exports = {
     'for-direction': ['error'],
     'getter-return': ['error'],
     'no-async-promise-executor': ['off'],
-    'no-await-in-loop': ['warn'],
+    'no-await-in-loop': ['off'],
     'no-compare-neg-zero': ['error'],
     'no-cond-assign': ['error', 'except-parens'],
     'no-constant-condition': ['error', { checkLoops: true }],

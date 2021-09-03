@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 const commander = require('commander');
 const fs = require('fs');
 
@@ -19,14 +19,14 @@ async function main() {
 
   logger.debug('Updating links', { type: 'general' });
 
-  const playbooks_dir = `${process.cwd()}/playbooks`;
+  const playbooksDir = `${process.cwd()}/playbooks`;
 
   if (options.icao) {
     const airport = getAirport(options.icao);
     let playbook = null;
     try {
-      const _playbook = fs.readFileSync(`${playbooks_dir}/${airport.iso_country}.json`, 'utf8');
-      playbook = JSON.parse(_playbook);
+      const fsPlaybook = fs.readFileSync(`${playbooksDir}/${airport.iso_country}.json`, 'utf8');
+      playbook = JSON.parse(fsPlaybook);
     } catch (error) {
       logger.error(`Playbook for ${airport.iso_country} not found`, { type: 'general' });
       logger.error(error);
@@ -38,8 +38,8 @@ async function main() {
     const airports = getAirportsByCountry(options.country);
     let playbook = null;
     try {
-      const _playbook = fs.readFileSync(`${playbooks_dir}/${options.country}.json`, 'utf8');
-      playbook = JSON.parse(_playbook);
+      const fsPlaybook = fs.readFileSync(`${playbooksDir}/${options.country}.json`, 'utf8');
+      playbook = JSON.parse(fsPlaybook);
     } catch (error) {
       logger.error(`Playbook for ${options.country} not found`, { type: 'general' });
       logger.error(error);
@@ -48,16 +48,16 @@ async function main() {
       await getCharts(playbook, airports, false);
     }
   } else {
-    const playbooks = fs.readdirSync(playbooks_dir);
+    const playbooks = fs.readdirSync(playbooksDir);
 
-    for (const _ of playbooks) {
-      const _playbook = fs.readFileSync(`${playbooks_dir}/${_}`, 'utf8');
-      const playbook = JSON.parse(_playbook);
+    for (let i = 0; i < playbooks.length; i += 1) {
+      const country = playbooks[i];
+      const fsPlaybook = fs.readFileSync(`${playbooksDir}/${country}`, 'utf8');
+      const playbook = JSON.parse(fsPlaybook);
       const airports = getAirportsByCountry(playbook.country.iso);
       await getCharts(playbook, airports, false);
     }
   }
-
 
   logger.debug('Updated links', { type: 'general' });
 }

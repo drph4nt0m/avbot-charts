@@ -31,7 +31,7 @@ jobs:
 
       - name: Jest
         run: npm test
-        
+
       - name: Codecov
         uses: codecov/codecov-action@v2
         with:

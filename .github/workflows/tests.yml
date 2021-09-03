@@ -1,4 +1,4 @@
-name: 'Tests'
+name: 'Jest'
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [14.x, 16.x]
 
     steps:
       - name: Checkout
@@ -29,5 +29,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
+      - name: Test
         run: npm run test

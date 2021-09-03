@@ -10,7 +10,8 @@
     "lint": "eslint . --max-warnings 0",
     "lint-fix": "eslint . --fix",
     "prettier:ci": "prettier .",
-    "prettier": "prettier . -w"
+    "prettier": "prettier . -w",
+    "jest": "jest && codecov"
   },
   "author": "",
   "license": "ISC",
@@ -37,5 +38,9 @@
     "eslint-plugin-import": "^2.23.2",
     "eslint-plugin-prettier": "^3.3.1",
     "nodemon": "^2.0.12"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   }
 }

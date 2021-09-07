@@ -1,0 +1,37 @@
+{
+  "country": {
+    "iso": "NL",
+    "name": "Netherlands"
+  },
+  "source": "Luchtverkeersleiding Nederland",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://www.lvnl.nl/eaip/2021-08-26-AIRAC/html",
+      "paths": [
+        {
+          "route": "/index-en-GB.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAISMenuContentFrame\"]",
+              "attribute": "src"
+            },
+            {
+              "selector": "frame[name=\"eAISMenuFrameset\"]",
+              "attribute": "src"
+            },
+            {
+              "selector": "frame[name=\"eAISMenuContent\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[title=\"${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

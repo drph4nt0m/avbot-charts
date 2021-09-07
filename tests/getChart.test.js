@@ -4,7 +4,7 @@ const getChart = require('../app/getChart');
 const playbooks_dir = `${process.cwd()}/playbooks`;
 const uriRegEx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
 
-jest.setTimeout(60000);
+jest.setTimeout(300000);
 
 async function getChartWrapper(country, icao) {
   const _playbook = fs.readFileSync(`${playbooks_dir}/${country}.json`, 'utf8');
@@ -22,6 +22,16 @@ describe('IN', () => {
   });
 });
 
+describe('NL', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('NL', 'EHAM')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('NL', 'EHHA')).toMatch('error');
+  });
+});
+
 describe('US', () => {
   test('Found', async () => {
     expect(await getChartWrapper('US', 'KJFK')).toMatch(uriRegEx);
@@ -31,3 +41,4 @@ describe('US', () => {
     expect(await getChartWrapper('US', 'KISZ')).toMatch('error');
   });
 });
+

@@ -6,10 +6,13 @@ const logger = require('./logger');
 const getAirportsByCountry = require('./getAirportsByCountry');
 const getAirport = require('./getAirport');
 const getCharts = require('./getCharts');
+const updateCompletedCountries = require('./updateCompletedCountries');
 
 commander.program
-  .option('--icao [ICAO_CODE]', 'Scrape only one specific airport by airport ICAO code')
-  .option('--country [ISO_CODE]', 'Scrape all airports in one specific country by country ISO code')
+  .option('--icao <ICAO_CODE>', 'Scrape only one specific airport by airport ICAO code')
+  .option('--country <ISO_CODE>', 'Scrape all airports in one specific country by country ISO code')
+  .option('--all', 'Scrape all airports in all the countries')
+  .option('--completed <ISO_CODE>', 'Add country to completed list')
   .parse(process.argv);
 
 const options = commander.program.opts();
@@ -47,7 +50,7 @@ async function main() {
     if (playbook) {
       await getCharts(playbook, airports, false);
     }
-  } else {
+  } else if (options.all) {
     const playbooks = fs.readdirSync(playbooksDir);
 
     for (let i = 0; i < playbooks.length; i += 1) {
@@ -57,6 +60,8 @@ async function main() {
       const airports = getAirportsByCountry(playbook.country.iso);
       await getCharts(playbook, airports, false);
     }
+  } else if (options.completed) {
+    await updateCompletedCountries(options.completed.split(','));
   }
 
   logger.debug('Updated links', { type: 'general' });

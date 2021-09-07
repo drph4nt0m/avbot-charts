@@ -41,4 +41,3 @@ describe('US', () => {
     expect(await getChartWrapper('US', 'KISZ')).toMatch('error');
   });
 });
-

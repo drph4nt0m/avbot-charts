@@ -1,0 +1,23 @@
+{
+  "country": {
+    "iso": "AU",
+    "name": "Australia"
+  },
+  "source": "Airservices Australia",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://www.airservicesaustralia.com/aip/current/dap",
+      "paths": [
+        {
+          "route": "/AeroProcChartsTOC.htm"
+        }
+      ],
+      "search": {
+        "selector": "h3[style=\"text-align:left\"]",
+        "regex": "\\(${icao}\\)",
+        "text": "${icao}"
+      }
+    }
+  }
+}

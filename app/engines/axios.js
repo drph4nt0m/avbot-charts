@@ -57,7 +57,7 @@ module.exports = async (features, icao) => {
       if (!searchResults) {
         throw new Error('Not Found');
       }
-      return `${lastUrl}#:~:text=${searchResults[0]}`;
+      return `${lastUrl}#:~:text=${fmtr(features.search.text, { icao })}`;
     } else {
       return lastUrl;
     }

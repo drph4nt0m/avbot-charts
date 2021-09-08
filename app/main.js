@@ -12,6 +12,7 @@ commander.program
   .option('--icao <ICAO_CODE>', 'Scrape only one specific airport by airport ICAO code')
   .option('--country <ISO_CODE>', 'Scrape all airports in one specific country by country ISO code')
   .option('--all', 'Scrape all airports in all the countries')
+  .option('--prod', 'Run the command but dont publish to database')
   .option('--completed <ISO_CODE>', 'Add country to completed list')
   .parse(process.argv);
 
@@ -21,6 +22,13 @@ async function main() {
   logger.debug(process.argv.join(' '), { type: 'general' });
 
   const playbooksDir = `${process.cwd()}/playbooks`;
+
+  let prodMode = false;
+
+  if (options.prod) {
+    prodMode = true;
+    logger.debug('Running in production mode', { type: 'general' });
+  }
 
   if (options.icao) {
     logger.debug('Updating links', { type: 'general' });
@@ -35,7 +43,7 @@ async function main() {
       logger.error(error);
     }
     if (playbook) {
-      await getCharts(playbook, [airport], false);
+      await getCharts(playbook, [airport], prodMode);
     }
 
     logger.debug('Updated links', { type: 'general' });
@@ -52,7 +60,7 @@ async function main() {
       logger.error(error);
     }
     if (playbook) {
-      await getCharts(playbook, airports, false);
+      await getCharts(playbook, airports, prodMode);
       await updateCompletedCountries([playbook.country.iso]);
     }
 
@@ -67,7 +75,7 @@ async function main() {
       const fsPlaybook = fs.readFileSync(`${playbooksDir}/${country}`, 'utf8');
       const playbook = JSON.parse(fsPlaybook);
       const airports = getAirportsByCountry(playbook.country.iso);
-      await getCharts(playbook, airports, false);
+      await getCharts(playbook, airports, prodMode);
       await updateCompletedCountries([playbook.country.iso]);
     }
 
@@ -76,6 +84,8 @@ async function main() {
     await updateCompletedCountries(options.completed.split(','));
     logger.debug('Updated completed countries link', { type: 'general' });
   }
+
+  process.exit(0);
 }
 
 main();

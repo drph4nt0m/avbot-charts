@@ -51,6 +51,13 @@ module.exports = async (features, icao) => {
         throw new Error('Not Found');
       }
       return `${fmtr(features.chart.baseUrl, { baseUrl: features.baseUrl })}${lnk.replaceAll(' ', '%20')}`;
+    } else if (features.search) {
+      const searchResponse = $(fmtr(features.search.selector)).text();
+      const searchResults = searchResponse.match(new RegExp(fmtr(features.search.regex, { icao }), 'g'));
+      if (!searchResults) {
+        throw new Error('Not Found');
+      }
+      return `${lastUrl}#:~:text=${searchResults[0]}`;
     } else {
       return lastUrl;
     }

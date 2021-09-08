@@ -4,7 +4,7 @@ const saveLink = require('./saveLink');
 const getChart = require('./getChart');
 const logger = require('./logger');
 
-module.exports = async (playbook, airports, debug = false) => {
+module.exports = async (playbook, airports, prodMode = false) => {
   logger.debug(`Starting ${playbook.country.name}`, { type: 'general' });
 
   for (let i = 0; i < airports.length; i += 1) {
@@ -12,7 +12,7 @@ module.exports = async (playbook, airports, debug = false) => {
     const res = await getChart(playbook, airport.ident);
     if (res !== 'error') {
       logger.info(`${arrayIndexString(i, airports)} (${airport.ident}) ${res}`, { type: 'web' });
-      if (!debug) {
+      if (prodMode) {
         await saveLink({ icao: airport.ident, link: res.trim(), source: playbook.source, country: playbook.country.iso });
       }
     } else {

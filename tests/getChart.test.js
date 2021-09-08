@@ -12,13 +12,13 @@ async function getChartWrapper(country, icao) {
   return await getChart(playbook, icao);
 }
 
-describe('IN', () => {
+describe('AE', () => {
   test('Found', async () => {
-    expect(await getChartWrapper('IN', 'VABB')).toMatch(uriRegEx);
+    expect(await getChartWrapper('AE', 'OMDB')).toMatch(uriRegEx);
   });
 
   test('Not Found', async () => {
-    expect(await getChartWrapper('IN', 'IN-0030')).toMatch('error');
+    expect(await getChartWrapper('AE', 'OMAM')).toMatch('error');
   });
 });
 
@@ -29,6 +29,16 @@ describe('GB', () => {
 
   test('Not Found', async () => {
     expect(await getChartWrapper('GB', 'EHHA')).toMatch('error');
+  });
+});
+
+describe('IN', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('IN', 'VABB')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('IN', 'IN-0030')).toMatch('error');
   });
 });
 

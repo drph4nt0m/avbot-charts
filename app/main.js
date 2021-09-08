@@ -20,11 +20,11 @@ const options = commander.program.opts();
 async function main() {
   logger.debug(process.argv.join(' '), { type: 'general' });
 
-  logger.debug('Updating links', { type: 'general' });
-
   const playbooksDir = `${process.cwd()}/playbooks`;
 
   if (options.icao) {
+    logger.debug('Updating links', { type: 'general' });
+
     const airport = getAirport(options.icao);
     let playbook = null;
     try {
@@ -37,7 +37,11 @@ async function main() {
     if (playbook) {
       await getCharts(playbook, [airport], false);
     }
+
+    logger.debug('Updated links', { type: 'general' });
   } else if (options.country) {
+    logger.debug('Updating links', { type: 'general' });
+
     const airports = getAirportsByCountry(options.country);
     let playbook = null;
     try {
@@ -49,8 +53,13 @@ async function main() {
     }
     if (playbook) {
       await getCharts(playbook, airports, false);
+      await updateCompletedCountries([playbook.country.iso]);
     }
+
+    logger.debug('Updated links', { type: 'general' });
   } else if (options.all) {
+    logger.debug('Updating links', { type: 'general' });
+
     const playbooks = fs.readdirSync(playbooksDir);
 
     for (let i = 0; i < playbooks.length; i += 1) {
@@ -59,12 +68,14 @@ async function main() {
       const playbook = JSON.parse(fsPlaybook);
       const airports = getAirportsByCountry(playbook.country.iso);
       await getCharts(playbook, airports, false);
+      await updateCompletedCountries([playbook.country.iso]);
     }
+
+    logger.debug('Updated links', { type: 'general' });
   } else if (options.completed) {
     await updateCompletedCountries(options.completed.split(','));
+    logger.debug('Updated completed countries link', { type: 'general' });
   }
-
-  logger.debug('Updated links', { type: 'general' });
 }
 
 main();

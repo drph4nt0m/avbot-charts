@@ -5,5 +5,8 @@ module.exports = (countryCodes) => {
   const countries = link?.split('#')[1]?.split(',') || [];
   countries.push(...countryCodes);
   const uniqueCountries = [...new Set(countries)].sort();
-  fs.writeFileSync(`${process.cwd()}/completed.txt`, `https://www.amcharts.com/visited_countries/#${uniqueCountries.join(',')}`, { encoding: 'utf8', flag: 'w' });
+  fs.writeFileSync(`${process.cwd()}/completed.txt`, `https://www.amcharts.com/visited_countries/#${uniqueCountries.join(',')}`, {
+    encoding: 'utf8',
+    flag: 'w'
+  });
 };

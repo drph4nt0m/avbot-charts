@@ -1,1 +1,1 @@
-https://www.amcharts.com/visited_countries/#IN,NL,US
+https://www.amcharts.com/visited_countries/#GB,IN,NL,US

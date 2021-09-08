@@ -1,0 +1,33 @@
+{
+  "country": {
+    "iso": "GB",
+    "name": "Great Britain"
+  },
+  "source": "National Air Traffic Services",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://www.aurora.nats.co.uk/htmlAIP/Publications/2021-08-12-AIRAC/html",
+      "paths": [
+        {
+          "route": "/index-en-GB.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAISNavigationBase\"]",
+              "attribute": "src"
+            },
+            {
+              "selector": "frame[name=\"eAISNavigation\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[id=\"AD-2.${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

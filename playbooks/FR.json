@@ -1,0 +1,33 @@
+{
+  "country": {
+    "iso": "FR",
+    "name": "France"
+  },
+  "source": "Le Service de l'Information Aéronautique",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_09_SEP_2021/FRANCE/AIRAC-2021-09-09/html",
+      "paths": [
+        {
+          "route": "/index-fr-FR.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAISNavigationBase\"]",
+              "attribute": "src"
+            },
+            {
+              "selector": "frame[name=\"eAISNavigation\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[id=\"AD-2.eAIP.${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

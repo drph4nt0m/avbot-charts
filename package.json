@@ -27,7 +27,7 @@
     "jest": "^27.2.0",
     "mongoose": "^6.0.6",
     "prettier": "^2.4.1",
-    "puppeteer": "^10.2.0",
+    "puppeteer": "^10.4.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {

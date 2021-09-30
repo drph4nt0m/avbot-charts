@@ -42,7 +42,6 @@ body:
         Are you ready to work on this issue? Let us know, and we will assign it to you.
 
         Happy Coding!
-      render: markdown
   - type: checkboxes
     id: terms
     attributes:

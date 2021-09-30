@@ -34,6 +34,12 @@ it.
 Now, run the command `npm install` in your terminal. This will install all of
 our dependencies.
 
+### Step 3: Environment variables
+
+Run `cp .env.example .env` and fill all the variables.
+
+You can use [MongoDB Atlas](https://cloud.mongodb.com/) to create a free MongoDB database.
+
 ## Writing code that will be approved
 
 When you write your code, it should be fit enough to be merged.

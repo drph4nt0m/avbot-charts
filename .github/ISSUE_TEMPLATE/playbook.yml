@@ -42,11 +42,3 @@ body:
         Are you ready to work on this issue? Let us know, and we will assign it to you.
 
         Happy Coding!
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/drph4nt0m/avbot-charts/blob/main/CODE_OF_CONDUCT.md)
-      options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true

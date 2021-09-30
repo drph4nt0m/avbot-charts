@@ -25,7 +25,6 @@ body:
       placeholder: https://...
     validations:
       required: false
-  - type
   - type: textarea
     id: steps
     attributes:

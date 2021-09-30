@@ -1,0 +1,35 @@
+name: New charts
+description: Request charts
+title: "[Playbook]: "
+labels: ["playbook", "new"]
+assignees:
+  - drph4nt0m
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this feature request!
+  - type: input
+    id: country
+    attributes:
+      label: Country
+      description: What country charts are you requesting?
+      placeholder: India (IN)
+    validations:
+      required: true
+  - type: input
+    id: eaip
+    attributes:
+      label: eAIP
+      description: Country eAIP website
+      placeholder: https://...
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/drph4nt0m/avbot-charts/blob/main/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

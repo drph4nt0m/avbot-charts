@@ -28,8 +28,7 @@ body:
   - type: textarea
     id: steps
     attributes:
-      label: Steps
-      description: Steps to add new playbook
+      label: Steps to add a new playbook
       value: |
         You can check [playbooks](https://github.com/drph4nt0m/avbot-charts/tree/main/playbooks) for examples on chart playbooks and [axios engine](https://github.com/drph4nt0m/avbot-charts/blob/main/app/engines/axios.js) on how the features in the playbook are used by the axios scraping engine.
 

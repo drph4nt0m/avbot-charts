@@ -23,9 +23,7 @@ body:
     attributes:
       label: Country
       description: What country is the bug related to?
-      options:
-        - 1.0.2 (Default)
-        - 1.0.3 (Edge)
+      placeholder: India (IN)
     validations:
       required: false
   - type: textarea

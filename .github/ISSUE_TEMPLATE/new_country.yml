@@ -25,6 +25,26 @@ body:
       placeholder: https://...
     validations:
       required: false
+  - type
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps
+      description: Steps to add new playbook
+      value: |
+        You can check [playbooks](https://github.com/drph4nt0m/avbot-charts/tree/main/playbooks) for examples on chart playbooks and [axios engine](https://github.com/drph4nt0m/avbot-charts/blob/main/app/engines/axios.js) on how the features in the playbook are used by the axios scraping engine.
+
+        Tasks summary:
+        -[ ] Fork & clone AvBot Charts
+        -[ ] Create playbook for the country in playbooks
+        -[ ] Add tests for the country in tests/getChart.test.js (tests should be in alphabetical order of the country code)
+        -[ ] Push changes and submit a pull request
+        -[ ] If you need any help, reach out to us on our [Discord server](http://link.avbot.in/support).
+
+        Are you ready to work on this issue? Let us know, and we will assign it to you.
+
+        Happy Coding!
+      render: markdown
   - type: checkboxes
     id: terms
     attributes:

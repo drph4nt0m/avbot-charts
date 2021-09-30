@@ -12,7 +12,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/drph4nt0m/avbot-charts/actions?query=workflow%3APrettier"><img src="https://img.shields.io/github/workflow/status/drph4nt0m/avbot-charts/Prettier?style=for-the-badge" alt="Prettier"></a>
+  <a href="https://github.com/drph4nt0m/avbot-charts/actions?query=workflow%3APrettier"><img src="https://img.shields.io/github/workflow/status/drph4nt0m/avbot-charts/Prettier?style=for-the-badge&label=prettier" alt="Prettier"></a>
+  <a href="https://github.com/drph4nt0m/avbot-charts/actions?query=workflow%3Aci"><img src="https://img.shields.io/circleci/build/github/drph4nt0m/avbot-charts/main?style=for-the-badge&label=circleci" alt="circleci"></a>
 </p>
 
 <p align="center">

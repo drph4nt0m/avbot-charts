@@ -32,6 +32,16 @@ describe('AU', () => {
   });
 });
 
+describe('BZ', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('BZ', 'MZBZ')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('BZ', 'BZ-0001')).toMatch('error');
+  });
+});
+
 describe('FR', () => {
   test('Found', async () => {
     expect(await getChartWrapper('FR', 'LFPG')).toMatch(uriRegEx);

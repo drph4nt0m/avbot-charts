@@ -52,6 +52,16 @@ describe('GB', () => {
   });
 });
 
+describe('HN', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('HN', 'MHTG')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('HN', 'MHMI')).toMatch('error');
+  });
+});
+
 describe('IN', () => {
   test('Found', async () => {
     expect(await getChartWrapper('IN', 'VABB')).toMatch(uriRegEx);

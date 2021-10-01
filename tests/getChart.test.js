@@ -62,6 +62,16 @@ describe('IN', () => {
   });
 });
 
+describe('KZ', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('KZ', 'UATE')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('KZ', 'KZ-0095')).toMatch('error');
+  });
+});
+
 describe('NL', () => {
   test('Found', async () => {
     expect(await getChartWrapper('NL', 'EHAM')).toMatch(uriRegEx);

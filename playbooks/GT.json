@@ -1,0 +1,23 @@
+{
+  "country": {
+    "iso": "GT",
+    "name": "Guatemala"
+  },
+  "source": "COCESNA Aeronautical Information Publication",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://www.cocesna.org/aipca/AIP_2114/Eurocontrol/COCESNA/2021-10-07-NON%20AIRAC/html",
+      "paths": [
+        {
+          "route": "/eAIP/ES-menu-es-ES.html"
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[id=\"AD-2.eAIP.${icao}plus\"]+a",
+        "attribute": "href"
+      }
+    }
+  }
+}

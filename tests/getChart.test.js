@@ -72,6 +72,16 @@ describe('NL', () => {
   });
 });
 
+describe('SV', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('SV', 'MSLP')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('SV', 'MSAC')).toMatch('error');
+  });
+});
+
 describe('US', () => {
   test('Found', async () => {
     expect(await getChartWrapper('US', 'KJFK')).toMatch(uriRegEx);

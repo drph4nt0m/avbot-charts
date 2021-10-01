@@ -7,7 +7,7 @@
   "scraper": {
     "engine": "axios",
     "features": {
-      "baseUrl": "https://www.gcaa.gov.ae/aip/current/AIRACs/2021-P07/html",
+      "baseUrl": "https://www.gcaa.gov.ae/aip/current/AIRACs/2021-P08/html",
       "paths": [
         {
           "route": "/index-en-GB.html",

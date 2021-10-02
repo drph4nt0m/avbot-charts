@@ -32,6 +32,16 @@ describe('AU', () => {
   });
 });
 
+describe('BZ', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('BZ', 'MZBZ')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('BZ', 'BZ-0001')).toMatch('error');
+  });
+});
+
 describe('FR', () => {
   test('Found', async () => {
     expect(await getChartWrapper('FR', 'LFPG')).toMatch(uriRegEx);
@@ -52,6 +62,26 @@ describe('GB', () => {
   });
 });
 
+describe('GT', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('GT', 'MGGT')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('GT', 'GT-0001')).toMatch('error');
+  });
+});
+
+describe('HN', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('HN', 'MHTG')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('HN', 'MHMI')).toMatch('error');
+  });
+});
+
 describe('IN', () => {
   test('Found', async () => {
     expect(await getChartWrapper('IN', 'VABB')).toMatch(uriRegEx);
@@ -62,6 +92,26 @@ describe('IN', () => {
   });
 });
 
+describe('KZ', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('KZ', 'UATE')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('KZ', 'KZ-0095')).toMatch('error');
+  });
+});
+
+describe('NI', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('NI', 'MNMG')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('NI', 'MNAL')).toMatch('error');
+  });
+});
+
 describe('NL', () => {
   test('Found', async () => {
     expect(await getChartWrapper('NL', 'EHAM')).toMatch(uriRegEx);
@@ -69,6 +119,26 @@ describe('NL', () => {
 
   test('Not Found', async () => {
     expect(await getChartWrapper('NL', 'EHHA')).toMatch('error');
+  });
+});
+
+describe('SV', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('SV', 'MSLP')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('SV', 'MSAC')).toMatch('error');
+  });
+});
+
+describe('TH', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('TH', 'VTBU')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('TH', 'TH-0001')).toMatch('error');
   });
 });
 

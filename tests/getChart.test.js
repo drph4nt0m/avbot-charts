@@ -122,6 +122,16 @@ describe('HN', () => {
   });
 });
 
+describe('HU', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('HU', 'LHBC')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('HU', 'LBSC')).toMatch('error');
+  });
+});
+
 describe('IN', () => {
   test('Found', async () => {
     expect(await getChartWrapper('IN', 'VABB')).toMatch(uriRegEx);

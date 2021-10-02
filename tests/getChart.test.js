@@ -32,6 +32,16 @@ describe('AU', () => {
   });
 });
 
+describe('EE', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('EE', 'GEN-1.7')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('EE', 'GENT17')).toMatch('error');
+  });
+});
+
 describe('FR', () => {
   test('Found', async () => {
     expect(await getChartWrapper('FR', 'LFPG')).toMatch(uriRegEx);

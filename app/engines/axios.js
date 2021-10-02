@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const https = require('https');
 const fmtr = require('fmtr');
 const xpath = require('xpath');
-const dom = require('xmldom').DOMParser
+const dom = require('xmldom').DOMParser;
 
 module.exports = async (features, icao) => {
   try {
@@ -57,8 +57,8 @@ module.exports = async (features, icao) => {
         const body = new dom({
           locator: {},
           errorHandler: {
-            warning(w) { },
-            error(e) { },
+            warning(w) {},
+            error(e) {},
             fatalError(e) {
               throw new Error('Not Found');
             }

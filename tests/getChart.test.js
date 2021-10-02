@@ -132,6 +132,16 @@ describe('SV', () => {
   });
 });
 
+describe('TH', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('TH', 'VTBU')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('TH', 'TH-0001')).toMatch('error');
+  });
+});
+
 describe('US', () => {
   test('Found', async () => {
     expect(await getChartWrapper('US', 'KJFK')).toMatch(uriRegEx);

@@ -1,0 +1,33 @@
+{
+  "country": {
+    "iso": "TH",
+    "name": "Thailand"
+  },
+  "source": "The Civil Aviation Authority of Thailand",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://aip.caat.or.th/2021-08-12-AIRAC/html",
+      "paths": [
+        {
+          "route": "/index-en-GB.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAISNavigationBase\"]",
+              "attribute": "src"
+            },
+            {
+              "selector": "frame[name=\"eAISNavigation\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[id=\"AD-2.${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

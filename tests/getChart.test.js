@@ -64,11 +64,11 @@ describe('CR', () => {
 
 describe('EE', () => {
   test('Found', async () => {
-    expect(await getChartWrapper('EE', 'GEN-1.7')).toMatch(uriRegEx);
+    expect(await getChartWrapper('EE', 'EEEI')).toMatch(uriRegEx);
   });
 
   test('Not Found', async () => {
-    expect(await getChartWrapper('EE', 'GENT17')).toMatch('error');
+    expect(await getChartWrapper('EE', 'ECEL')).toMatch('error');
   });
 });
 

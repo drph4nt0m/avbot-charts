@@ -22,6 +22,16 @@ describe('AE', () => {
   });
 });
 
+describe('AL', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('AL', 'LAKU')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('AL', 'AL-0001')).toMatch('error');
+  });
+});
+
 describe('AU', () => {
   test('Found', async () => {
     expect(await getChartWrapper('AU', 'YSSY')).toMatch(uriRegEx);

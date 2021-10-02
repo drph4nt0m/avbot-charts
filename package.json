@@ -28,7 +28,9 @@
     "mongoose": "^6.0.8",
     "prettier": "^2.4.1",
     "puppeteer": "^10.4.0",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "xmldom": "^0.6.0",
+    "xpath": "^0.0.32"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

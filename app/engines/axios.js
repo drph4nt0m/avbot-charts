@@ -2,6 +2,8 @@ const axios = require('axios').default;
 const cheerio = require('cheerio');
 const https = require('https');
 const fmtr = require('fmtr');
+const xpath = require('xpath');
+const dom = require('xmldom').DOMParser
 
 module.exports = async (features, icao) => {
   try {
@@ -47,7 +49,24 @@ module.exports = async (features, icao) => {
       }
     }
     if (features.chart) {
-      const lnk = $(fmtr(features.chart.selector, fmtrOptions)).attr(features.chart.attribute);
+      let lnk = null;
+      if (features.chart.selector) {
+        lnk = $(fmtr(features.chart.selector, fmtrOptions)).attr(features.chart.attribute);
+      } else if (features.chart.xpath) {
+        // eslint-disable-next-line new-cap
+        const body = new dom({
+          locator: {},
+          errorHandler: {
+            warning(w) { },
+            error(e) { },
+            fatalError(e) {
+              throw new Error('Not Found');
+            }
+          }
+        }).parseFromString($('html').html());
+        const element = xpath.select1(fmtr(features.chart.xpath, fmtrOptions), body);
+        lnk = element.getAttribute('href').trim();
+      }
       if (!lnk) {
         throw new Error('Not Found');
       }

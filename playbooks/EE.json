@@ -1,0 +1,33 @@
+{
+  "country": {
+    "iso": "EE",
+    "name": "Estonia"
+  },
+  "source": "Estonian Air Navigation Services",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "http://eaip.eans.ee/2021-09-09/html/",
+      "paths": [
+        {
+          "route": "/index-en-GB.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAISNavigationBase\"]",
+              "attribute": "src"
+            },
+            {
+              "selector": "frame[name=\"eAISNavigation\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[id=\"AD-2.${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

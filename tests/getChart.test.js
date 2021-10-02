@@ -72,6 +72,16 @@ describe('CR', () => {
   });
 });
 
+describe('EE', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('EE', 'EEEI')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('EE', 'ECEL')).toMatch('error');
+  });
+});
+
 describe('FR', () => {
   test('Found', async () => {
     expect(await getChartWrapper('FR', 'LFPG')).toMatch(uriRegEx);

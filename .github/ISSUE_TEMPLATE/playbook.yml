@@ -1,9 +1,7 @@
 name: New charts
 description: Request charts
 title: '[Playbook]: '
-labels: ['playbook', 'new', 'good first issue', 'hacktoberfest']
-assignees:
-  - drph4nt0m
+labels: ['playbook']
 body:
   - type: markdown
     attributes:

@@ -1,0 +1,23 @@
+{
+  "country": {
+    "iso": "KZ",
+    "name": "Kazakhstan"
+  },
+  "source": "Aeronautical Information Management Department",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://www.ans.kz/AIP/eAIP/2021-11-04-AIRAC/html",
+      "paths": [
+        {
+          "route": "/eAIP/UA-menu-en-GB.html"
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[id=\"AD-2.${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "country": {
+    "iso": "CR",
+    "name": "Costa Rica"
+  },
+  "source": "COCESNA Aeronautical Information Publication",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://cocesna.org/aipca/AIP_C/aipca",
+      "paths": [
+        {
+          "route": "/aip_ca_pdf/ad/ad_2/ad_${lcIcao}.pdf"
+        }
+      ]
+    }
+  }
+}

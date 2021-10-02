@@ -1,21 +1,17 @@
 {
   "country": {
-    "iso": "AE",
-    "name": "United Arab Emirates"
+    "iso": "AL",
+    "name": "Albania"
   },
-  "source": "General Civil Aviation Authority",
+  "source": "AIR NAVIGATION SERVICES OF ALBANIA",
   "scraper": {
     "engine": "axios",
     "features": {
-      "baseUrl": "https://www.gcaa.gov.ae/aip/current/AIRACs/2021-P08/html",
+      "baseUrl": "https://albcontrol.al/al/aip/09-Sep-2021-A/2021-09-09-AIRAC/html",
       "paths": [
         {
-          "route": "/index-en-GB.html",
+          "route": "/index.html",
           "navigations": [
-            {
-              "selector": "frame[name=\"eAISNavigationBase\"]",
-              "attribute": "src"
-            },
             {
               "selector": "frame[name=\"eAISNavigation\"]",
               "attribute": "src"

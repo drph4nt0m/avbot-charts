@@ -7,7 +7,7 @@
   "scraper": {
     "engine": "axios",
     "features": {
-      "baseUrl": "https://www.lvnl.nl/eaip/2021-08-26-AIRAC/html",
+      "baseUrl": "https://www.lvnl.nl/eaip/2021-09-23-AIRAC/html",
       "paths": [
         {
           "route": "/index-en-GB.html",

@@ -1,13 +1,13 @@
 {
   "country": {
-    "iso": "AE",
-    "name": "United Arab Emirates"
+    "iso": "TH",
+    "name": "Thailand"
   },
-  "source": "General Civil Aviation Authority",
+  "source": "The Civil Aviation Authority of Thailand",
   "scraper": {
     "engine": "axios",
     "features": {
-      "baseUrl": "https://www.gcaa.gov.ae/aip/current/AIRACs/2021-P08/html",
+      "baseUrl": "https://aip.caat.or.th/2021-08-12-AIRAC/html",
       "paths": [
         {
           "route": "/index-en-GB.html",

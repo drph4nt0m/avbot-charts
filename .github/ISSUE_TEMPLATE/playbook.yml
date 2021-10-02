@@ -1,9 +1,7 @@
-name: New charts
-description: Request charts
+name: 📓 New charts
+description: Submit a proposal for new charts
 title: '[Playbook]: '
-labels: ['playbook', 'new', 'good first issue', 'hacktoberfest']
-assignees:
-  - drph4nt0m
+labels: ['playbook']
 body:
   - type: markdown
     attributes:

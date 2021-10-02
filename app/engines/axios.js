@@ -18,13 +18,14 @@ module.exports = async (features, icao) => {
 
     let $ = null;
     let lastUrl = features.baseUrl;
+    const fmtrOptions = { baseUrl: features.baseUrl, icao, lcIcao: icao.toLowerCase() };
 
     if (features.paths && features.paths.length > 0) {
       for (let i = 0; i < features.paths.length; i += 1) {
         const path = features.paths[i];
-        const pResponse = await api.get(fmtr(path.route, { icao }));
+        const pResponse = await api.get(fmtr(path.route, fmtrOptions));
         // if (p_response.status !== 200) console.log(`${p_response.status} ${p_response.statusText}`);
-        lastUrl = `${features.baseUrl}${fmtr(path.route, { icao })}`;
+        lastUrl = `${features.baseUrl}${fmtr(path.route, fmtrOptions)}`;
         $ = cheerio.load(pResponse.data);
         if (path.navigations && path.navigations.length > 0) {
           for (let j = 0; j < path.navigations.length; j += 1) {
@@ -46,18 +47,18 @@ module.exports = async (features, icao) => {
       }
     }
     if (features.chart) {
-      const lnk = $(fmtr(features.chart.selector, { icao })).attr(features.chart.attribute);
+      const lnk = $(fmtr(features.chart.selector, fmtrOptions)).attr(features.chart.attribute);
       if (!lnk) {
         throw new Error('Not Found');
       }
-      return `${fmtr(features.chart.baseUrl, { baseUrl: features.baseUrl })}${lnk.replaceAll(' ', '%20')}`;
+      return `${fmtr(features.chart.baseUrl, fmtrOptions)}${lnk.replaceAll(' ', '%20')}`;
     } else if (features.search) {
       const searchResponse = $(fmtr(features.search.selector)).text();
-      const searchResults = searchResponse.match(new RegExp(fmtr(features.search.regex, { icao }), 'g'));
+      const searchResults = searchResponse.match(new RegExp(fmtr(features.search.regex, fmtrOptions), 'g'));
       if (!searchResults) {
         throw new Error('Not Found');
       }
-      return `${lastUrl}#:~:text=${fmtr(features.search.text, { icao })}`;
+      return `${lastUrl}#:~:text=${fmtr(features.search.text, fmtrOptions)}`;
     } else {
       return lastUrl;
     }

@@ -142,6 +142,16 @@ describe('KZ', () => {
   });
 });
 
+describe('LK', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('LK', 'VCCA')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('LK', 'LK-0001')).toMatch('error');
+  });
+});
+
 describe('NI', () => {
   test('Found', async () => {
     expect(await getChartWrapper('NI', 'MNMG')).toMatch(uriRegEx);

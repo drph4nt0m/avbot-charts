@@ -152,6 +152,16 @@ describe('KZ', () => {
   });
 });
 
+describe('LK', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('LK', 'VCCA')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('LK', 'LK-0001')).toMatch('error');
+  });
+});
+
 describe('NI', () => {
   test('Found', async () => {
     expect(await getChartWrapper('NI', 'MNMG')).toMatch(uriRegEx);
@@ -200,4 +210,14 @@ describe('US', () => {
   // test('Not Found', async () => {
   //   expect(await getChartWrapper('US', 'KISZ')).toMatch('error');
   // });
+});
+
+describe('VE', () => {
+  test('Found', async () => {
+    expect(await getChartWrapper('VE', 'SVAC')).toMatch(uriRegEx);
+  });
+
+  test('Not Found', async () => {
+    expect(await getChartWrapper('VE', 'VE-0030')).toMatch('error');
+  });
 });

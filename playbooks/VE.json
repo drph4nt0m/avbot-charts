@@ -1,34 +1,33 @@
 {
-    "country": {
-      "iso": "VE",
-      "name": "Venezuela"
-    },
-    "source": "Servicios de venezuela",
-    "scraper": {
-      "engine": "axios",
-      "features": {
-        "baseUrl": "http://www.inac.gob.ve/eaip/2018-07-19/html",
-        "paths": [
-          {
-            "route": "/index-en-GB.html",
-            "navigations": [
-              {
-                "selector": "frame[name=\"eAISNavigationBase\"]",
-                "attribute": "src"
-              },
-              {
-                "selector": "frame[name=\"eAISNavigation\"]",
-                "attribute": "src"
-              }
-            ]
-          }
-        ],
-        "chart": {
-          "baseUrl": "${baseUrl}/eAIP/",
-          "selector": "a[title=\"${icao}\"]",
-          "attribute": "href"
+  "country": {
+    "iso": "VE",
+    "name": "Venezuela"
+  },
+  "source": "Servicios de venezuela",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "http://www.inac.gob.ve/eaip/2019-12-05/html",
+      "paths": [
+        {
+          "route": "/index-en-GB.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAISNavigationBase\"]",
+              "attribute": "src"
+            },
+            {
+              "selector": "frame[name=\"eAISNavigation\"]",
+              "attribute": "src"
+            }
+          ]
         }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[title=\"${icao}\"]",
+        "attribute": "href"
       }
     }
   }
-  
+}

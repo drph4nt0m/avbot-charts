@@ -41,13 +41,12 @@ async function main() {
         logger.error(`Playbook for ${airport.iso_country} not found`, { type: 'general' });
         logger.error(error);
       }
+      if (playbook) {
+        await getCharts(playbook, [airport], prodMode);
+      }
     } else {
       logger.error(`No airport with icao code ${options.icao} found`, { type: 'general' });
     }
-    if (playbook) {
-      await getCharts(playbook, [airport], prodMode);
-    }
-
     logger.debug('Updated links', { type: 'general' });
   } else if (options.country) {
     logger.debug('Updating links', { type: 'general' });

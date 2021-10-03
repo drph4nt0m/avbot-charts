@@ -33,12 +33,16 @@ async function main() {
 
     const airport = getAirport(options.icao);
     let playbook = null;
-    try {
-      const fsPlaybook = fs.readFileSync(`${playbooksDir}/${airport.iso_country}.json`, 'utf8');
-      playbook = JSON.parse(fsPlaybook);
-    } catch (error) {
-      logger.error(`Playbook for ${airport.iso_country} not found`, { type: 'general' });
-      logger.error(error);
+    if (airport) {
+      try {
+        const fsPlaybook = fs.readFileSync(`${playbooksDir}/${airport.iso_country}.json`, 'utf8');
+        playbook = JSON.parse(fsPlaybook);
+      } catch (error) {
+        logger.error(`Playbook for ${airport.iso_country} not found`, { type: 'general' });
+        logger.error(error);
+      }
+    } else {
+      logger.error(`No airport with icao code ${options.icao} found`, { type: 'general' });
     }
     if (playbook) {
       await getCharts(playbook, [airport], prodMode);

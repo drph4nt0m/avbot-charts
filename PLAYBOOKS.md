@@ -9,7 +9,8 @@ In order to get charts, Avbot needs some information about how to scrap the requ
 A playbook is a JSON file that will be used by our [scraping engine](./app/engines/axios.js) to get charts.See [**_playbook for India_** :india:](./playbooks/IN.json) for reference.
 
 ## Playbooks definations 📔
-``` js
+
+```js
 {
   "country": {
     "iso": "IN", // ISO code of country.
@@ -17,13 +18,13 @@ A playbook is a JSON file that will be used by our [scraping engine](./app/engin
   },
   "source": "Airports Authority of India", // Source of information
   "scraper": {
-    "engine": "axios", 
-    "features": { 
+    "engine": "axios",
+    "features": {
       "baseUrl": "https://aim-india.aai.aero/eaip-v2-02-2021", //baseUrl is eAIP URL
       "paths": [ // Paths are for navigating the scraper to required sections i.e Charts Section
         {
           "route": "/index-en-GB.html", // Route for the front index page.
-          "navigations": [ //The scraping engine selects all the selectors and get thier src and progressively make his way through it. 
+          "navigations": [ //The scraping engine selects all the selectors and get thier src and progressively make his way through it.
             {
               "selector": "frame[name=\"eAISNavigationBase\"]",
               "attribute": "src"
@@ -36,7 +37,7 @@ A playbook is a JSON file that will be used by our [scraping engine](./app/engin
           ]
         }
       ],
-      // Then we look for aerodromes and airport charts. The aerodromes are identified by thier 
+      // Then we look for aerodromes and airport charts. The aerodromes are identified by thier
       // icao codes. We select a selector on basis of icao code.
       "chart": {
         "baseUrl": "${baseUrl}/eAIP/",
@@ -52,13 +53,16 @@ A playbook is a JSON file that will be used by our [scraping engine](./app/engin
 
 Writing a playbook is really straightforward.
 
-### Step 1: Find that country eAIP 
+### Step 1: Find that country eAIP
+
 A great resource for finding AIPs is [this](https://erau.libguides.com/UAS/eAIP)
 
 ### Step 2: Get the routes and selectors for paths
+
 Go through page source and find selectors that lead you to the charts page. Write those selectors under paths in playbook.
 
 ### Step 3: Find the property which help in getting the link.
+
 Most AIPs have buttons with title property set as ICAO code. Get the selector according to title and set chart selector with it.
 
 NOTE : Not all AIPs follow the same pattern. Make sure that the [Axios Engine](./app/engines/axios.js) finds your selector.
@@ -66,13 +70,15 @@ NOTE : Not all AIPs follow the same pattern. Make sure that the [Axios Engine](.
 ## Submitting a playbook
 
 - After you wrote the playbook for a country. Make sure your code runs
-    ``` bash
-    node app/main.js --icao <ICAO CODE>
-    ```
+
+  ```bash
+  node app/main.js --icao <ICAO CODE>
+  ```
 
 - Make sure you add a test for your playbook in [getChart.test.js](./tests/getChart.test.js)
 
 - Finally submit your Playbook as Pull Request.
 
 ## All Done.
+
 Thanks for reading !

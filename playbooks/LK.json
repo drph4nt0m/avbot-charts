@@ -1,0 +1,30 @@
+{
+    "country": {
+      "iso": "LK",
+      "name": "Sri Lanka"
+    },
+    "source": "Civil Aviation Authority of Sri Lanka",
+    "scraper": {
+      "engine": "axios",
+      "features": {
+        "baseUrl": "https://www.airport.lk/aasl/AIS/AMDT%20WEB/AIP%20FROM%2015%20JUL%202021/htm",
+        "paths": [
+          {
+            "route": "/125.htm",
+            "navigations": [
+              {
+                "selector": "frame[name=\"detail\"]",
+                "attribute": "src"
+              }
+            ]
+          }
+        ],
+        "chart": {
+          "baseUrl": "${baseUrl}/",
+          "xpath": "//a[contains(text(),'${icao}')]",
+          "attribute": "href"
+        }
+      }
+    }
+  }
+  

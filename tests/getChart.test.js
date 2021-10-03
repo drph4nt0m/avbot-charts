@@ -148,7 +148,7 @@ describe('LK', () => {
   });
 
   test('Not Found', async () => {
-    expect(await getChartWrapper('KZ', 'ECEL')).toMatch('error');
+    expect(await getChartWrapper('LK', 'LK-0001')).toMatch('error');
   });
 });
 

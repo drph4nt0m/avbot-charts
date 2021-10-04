@@ -1,13 +1,21 @@
 const axios = require('axios').default;
+const axiosRetry = require('axios-retry');
+const setupCache = require('axios-cache-adapter').setupCache;
 const cheerio = require('cheerio');
 const https = require('https');
 const fmtr = require('fmtr');
 const xpath = require('xpath');
 const dom = require('xmldom').DOMParser;
 
+const cache = setupCache({
+  maxAge: 15 * 60 * 1000,
+  limit: 10 // limit sufficient for 1 playbook, the scrapper usually iterates on max 3 pages
+});
+
 module.exports = async (features, icao) => {
   try {
     const api = axios.create({
+      adapter: cache.adapter,
       baseURL: features.baseUrl,
       timeout: 60000,
       httpsAgent: new https.Agent({ rejectUnauthorized: false, keepAlive: true }),
@@ -17,6 +25,9 @@ module.exports = async (features, icao) => {
         'connection': 'keep-alive'
       }
     });
+
+    // handle random network errors, especially EAI_AGAIN
+    axiosRetry(api, { retries: 10, retryDelay: axiosRetry.exponentialDelay });
 
     let $ = null;
     let lastUrl = features.baseUrl;
@@ -65,7 +76,9 @@ module.exports = async (features, icao) => {
           }
         }).parseFromString($('html').html());
         const element = xpath.select1(fmtr(features.chart.xpath, fmtrOptions), body);
-        lnk = element.getAttribute('href').trim();
+        if (element) {
+          lnk = element.getAttribute('href').trim();
+        }
       }
       if (!lnk) {
         throw new Error('Not Found');

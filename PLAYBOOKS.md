@@ -1,11 +1,11 @@
 # Playbook Guide 📔
 
 This file will assist you with everything you need to know about
-  - [What is a playbook 😕](#what-is-a-playbook-)
-  - [Playbooks definitions 🧾](#playbooks-definitions-)
-  - [Writing playbooks for different countries 🌍](#writing-playbooks-for-different-countries-)
-  - [Submitting a playbook](#submitting-a-playbook)
 
+- [What is a playbook 😕](#what-is-a-playbook-)
+- [Playbooks definitions 🧾](#playbooks-definitions-)
+- [Writing playbooks for different countries 🌍](#writing-playbooks-for-different-countries-)
+- [Submitting a playbook](#submitting-a-playbook)
 
 ## What is a playbook 😕
 
@@ -16,7 +16,7 @@ A playbook is a JSON file that will be used by one of our [scraping engines](./a
 ## Playbooks definitions 🧾
 
 | Key                                                | Description                                                                                                       | Type         | Required                                   | Example                                                   |
-| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------ | --------------------------------------------------------- |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------ | --------------------------------------------------------- | -------------------------------- |
 | `country`                                          | Country details                                                                                                   | JSON         | Yes                                        | [See example](playbooks/IN.json)                          |
 | `country.iso`                                      | [alpha-2 code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements) of the country | String       | Yes                                        | `"iso": "IN"`                                             |
 | `country.name`                                     | Name of the country                                                                                               | String       | Yes                                        | `"name": "India"`                                         |
@@ -27,7 +27,7 @@ A playbook is a JSON file that will be used by one of our [scraping engines](./a
 | `scraper.features.baseUrl`                         | Constant prefix part of the URL to be used by the routes                                                          | String       | Yes                                        | `"baseUrl": "https://aim-india.aai.aero/eaip-v2-02-2021"` |
 | `scraper.features.paths`                           | Collection of multiple routes the scrapper needs to take to reach the final chart page                            | Array        | Yes                                        | [See example](playbooks/IN.json)                          |
 | `scraper.features.paths / route`                   | Suffix path to be used along with `scraper.features.baseUrl` to visit pages                                       | String       | Yes                                        | `"route": "/index-en-GB.html"`                            |
-| `scraper.features.paths / navigations`             | CSS selector based navigation to be performed on the current `scraper.features.paths | route`                     | Array        | Optional                                   | [See example](playbooks/IN.json)                          |
+| `scraper.features.paths / navigations`             | CSS selector based navigation to be performed on the current `scraper.features.paths                              | route`       | Array                                      | Optional                                                  | [See example](playbooks/IN.json) |
 | `scraper.features.paths / navigations / selector`  | CSS Selector for the element that is to be used for navigation                                                    | String       | Yes                                        | `"selector": "frame[name=\"eAISNavigationBase\"]"`        |
 | `scraper.features.paths / navigations / attribute` | URL route giving attribute of the selected element                                                                | String       | Yes                                        | `"attribute": "src"`                                      |
 | `scraper.features.chart`                           | The CSS selector based configuration for getting and formatting the final chart URL                               | JSON         | Yes (can either use `chart` or `search`)   | [See example](playbooks/IN.json)                          |

@@ -9,7 +9,7 @@ const getCharts = require('./getCharts');
 
 commander.program
   .option('--icao <ICAO_CODE>', 'Scrape only one specific airport by airport ICAO code')
-  .option('--country <ISO_CODE>', 'Scrape all airports in one specific country by country ISO code')
+  .option('--country <ISO_CODES>', 'Scrape all airports in specific countries by country ISO code')
   .option('--all', 'Scrape all airports in all the countries')
   .option('--prod', 'Run the command but dont publish to database')
   .parse(process.argv);
@@ -51,17 +51,22 @@ async function main() {
   } else if (options.country) {
     logger.debug('Updating links', { type: 'general' });
 
-    const airports = getAirportsByCountry(options.country);
-    let playbook = null;
-    try {
-      const fsPlaybook = fs.readFileSync(`${playbooksDir}/${options.country}.json`, 'utf8');
-      playbook = JSON.parse(fsPlaybook);
-    } catch (error) {
-      logger.error(`Playbook for ${options.country} not found`, { type: 'general' });
-      logger.error(error);
-    }
-    if (playbook) {
-      await getCharts(playbook, airports, prodMode);
+    const countries = options.country.split(',');
+
+    for (let i = 0; i < countries.length; i += 1) {
+      const country = countries[i];
+      const airports = getAirportsByCountry(country);
+      let playbook = null;
+      try {
+        const fsPlaybook = fs.readFileSync(`${playbooksDir}/${country}.json`, 'utf8');
+        playbook = JSON.parse(fsPlaybook);
+      } catch (error) {
+        logger.error(`Playbook for ${country} not found`, { type: 'general' });
+        logger.error(error);
+      }
+      if (playbook) {
+        await getCharts(playbook, airports, prodMode);
+      }
     }
 
     logger.debug('Updated links', { type: 'general' });

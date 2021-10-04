@@ -10,44 +10,21 @@ A playbook is a JSON file that will be used by our [scraping engine](./app/engin
 
 ## Playbooks definations 📔
 
-```js
-{
-  "country": {
-    "iso": "IN", // ISO code of country.
-    "name": "India" // Name of the country
-  },
-  "source": "Airports Authority of India", // Source of information
-  "scraper": {
-    "engine": "axios",
-    "features": {
-      "baseUrl": "https://aim-india.aai.aero/eaip-v2-02-2021", //baseUrl is eAIP URL
-      "paths": [ // Paths are for navigating the scraper to required sections i.e Charts Section
-        {
-          "route": "/index-en-GB.html", // Route for the front index page.
-          "navigations": [ //The scraping engine selects all the selectors and get thier src and progressively make his way through it.
-            {
-              "selector": "frame[name=\"eAISNavigationBase\"]",
-              "attribute": "src"
-            },
-            // A selector can be anything that has a src or href to guide the engine
-            {
-              "selector": "frame[name=\"eAISNavigation\"]",
-              "attribute": "src"
-            }
-          ]
-        }
-      ],
-      // Then we look for aerodromes and airport charts. The aerodromes are identified by thier
-      // icao codes. We select a selector on basis of icao code.
-      "chart": {
-        "baseUrl": "${baseUrl}/eAIP/",
-        "selector": "a[title=\"${icao}\"]",
-        "attribute": "href"
-      }
-    }
-  }
-}
-```
+| Keys          | Description                                            | Data type        | Required | Parent key | Example                                                                                                                          |
+| ------------- | ------------------------------------------------------ | ---------------- | -------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| iso           | ISO code of country                                    | String           | Yes      | Country    | `"iso":"IN"`                                                                                                                     |
+| name          | Name of the country                                    | String           | Yes      | Country    | `"name": "India"`                                                                                                                |
+| source        | Source of information                                  | String           | Yes      | source     | `"source": "Airports Authority of India"`                                                                                        |
+| engine        | Name of scraping engine(Axios currently)               | String           | Yes      | scraper    | `"engine": "axios"`                                                                                                              |
+| baseUrl       | URL for charts website(eAIP)                           | String           | Yes      | features   | `"baseUrl": "https://aim-india.aai.aero/eaip-v2-02-2021"`                                                                        |
+| paths         | Path for getting charts from eAIP                      | Array            | Yes      | features   | [See example](https://github.com/drph4nt0m/avbot-charts/blob/ec58c14ae01da70bcff68a4360027a2142a80366/playbooks/AU.json#L11-L15) |
+| route         | Route for the front page                               | String           | Yes      | paths      | `"route": "/index-en-GB.html"`                                                                                                   |
+| navigations   | Navigations for the engine to get charts page          | Array            | Optional | paths      | [See example](https://github.com/drph4nt0m/avbot-charts/blob/ec58c14ae01da70bcff68a4360027a2142a80366/playbooks/IN.json#L14-L23) |
+| chart.baseUrl | URL for charts page from eAIP                          | String           | Yes      | chart      | [See example](https://github.com/drph4nt0m/avbot-charts/blob/ec58c14ae01da70bcff68a4360027a2142a80366/playbooks/IN.json#L26-L30) |
+| selector      | HTML element selector                                  | String or Regexp | Yes      | chart      | `"selector": "a[title=\"${icao}\"]"`                                                                                             |
+| attribute     | Attribute of HTML selector                             | String           | Yes      | chart      | `"attribute": "href"`                                                                                                            |
+| regex         | Regular Expression for finding selectors based on icao | Regexp           | Optional | chart      | `"regex": "\\(${icao}\\)" `                                                                                                      |
+| xpath         | Special syntax for finding selectors                   | String           | Optional | chart      | `"xpath": "//a[contains(text(),'${icao}')]"`                                                                                     |
 
 ## Writing playbooks for different countries 🌍
 

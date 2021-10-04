@@ -6,11 +6,13 @@ const logger = require('./logger');
 const getAirportsByCountry = require('./getAirportsByCountry');
 const getAirport = require('./getAirport');
 const getCharts = require('./getCharts');
+const { count } = require('console');
 
 commander.program
   .option('--icao <ICAO_CODE>', 'Scrape only one specific airport by airport ICAO code')
   .option('--country <ISO_CODES>', 'Scrape all airports in specific countries by country ISO code')
   .option('--all', 'Scrape all airports in all the countries')
+  .option('--skip-country, --skipcountries [value...]', 'Skip these coutries by ISO code')
   .option('--prod', 'Run the command but dont publish to database')
   .parse(process.argv);
 
@@ -72,15 +74,23 @@ async function main() {
     logger.debug('Updated links', { type: 'general' });
   } else if (options.all) {
     logger.debug('Updating links', { type: 'general' });
-
+    let skip_list = [];
+    if(options.skipcountries)
+    {
+      skip_list = options.skipcountries;
+    }
     const playbooks = fs.readdirSync(playbooksDir);
 
     for (let i = 0; i < playbooks.length; i += 1) {
       const country = playbooks[i];
-      const fsPlaybook = fs.readFileSync(`${playbooksDir}/${country}`, 'utf8');
-      const playbook = JSON.parse(fsPlaybook);
-      const airports = getAirportsByCountry(playbook.country.iso);
-      await getCharts(playbook, airports, prodMode);
+      const isoCode = country.slice(0,-5); // Remove .json from FILE to get isoCode
+      if(!skip_list.includes(isoCode))
+      {
+        const fsPlaybook = fs.readFileSync(`${playbooksDir}/${country}`, 'utf8');
+        const playbook = JSON.parse(fsPlaybook);
+        const airports = getAirportsByCountry(playbook.country.iso);
+        await getCharts(playbook, airports, prodMode);
+      }
     }
 
     logger.debug('Updated links', { type: 'general' });

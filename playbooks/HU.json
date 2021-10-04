@@ -13,10 +13,6 @@
           "route": "/index.html",
           "navigations": [
             {
-              "selector": "frame[name=\"eAISNavigationBase\"]",
-              "attribute": "src"
-            },
-            {
               "selector": "frame[name=\"eAISNavigation\"]",
               "attribute": "src"
             }
@@ -24,7 +20,7 @@
         }
       ],
       "chart": {
-        "baseUrl": "${baseUrl}/eAIP/",
+        "baseUrl": "${baseUrl}/2021-08-12-AIRAC/html/eAIP/",
         "selector": "a[id=\"AD-2.${icao}\"]",
         "attribute": "href"
       }

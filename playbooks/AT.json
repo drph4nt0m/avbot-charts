@@ -1,0 +1,23 @@
+{
+  "country": {
+    "iso": "AT",
+    "name": "Austria"
+  },
+  "source": "Austro Control",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://eaip.austrocontrol.at/lo/210910",
+      "paths": [
+        {
+          "route": "/ad_2.htm"
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/",
+        "xpath": "//a[contains(text(),'${icao}')]",
+        "attribute": "href"
+      }
+    }
+  }
+}

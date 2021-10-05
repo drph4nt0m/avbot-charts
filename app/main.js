@@ -93,6 +93,7 @@ async function main() {
     logger.debug('Updated links', { type: 'general' });
   }
 
+  await logger.flushLogs();
   process.exit(0);
 }
 

@@ -22,21 +22,26 @@ body:
       description: Country eAIP website
       placeholder: https://...
     validations:
-      required: false
-  - type: textarea
+      required: true
+  - type: input
     id: steps
     attributes:
       label: Steps to add a new playbook
-      value: |
-        You can check [playbooks](https://github.com/drph4nt0m/avbot-charts/tree/main/playbooks) for examples on chart playbooks and [axios engine](https://github.com/drph4nt0m/avbot-charts/blob/main/app/engines/axios.js) on how the features in the playbook are used by the axios scraping engine.
-
-        Tasks summary:
-        -[ ] Fork & clone AvBot Charts
-        -[ ] Create playbook for the country in playbooks
-        -[ ] Add tests for the country in tests/getChart.test.js (tests should be in alphabetical order of the country code)
-        -[ ] Push changes and submit a pull request
-        -[ ] If you need any help, reach out to us on our [Discord server](http://link.avbot.in/support).
-
-        Are you ready to work on this issue? Let us know, and we will assign it to you.
-
-        Happy Coding!
+      value: https://github.com/drph4nt0m/avbot-charts/wiki/Playbooks
+    validations:
+      required: true
+  - type: checkboxes
+    id: no-duplicate-issues
+    attributes:
+      label: "👀 Have you spent some time to check if this issue has been raised before?"
+      description: "Have you Googled for a similar issue or checked our older issues for a similar bug?"
+      options:
+        - label: "I checked and didn't find similar issue"
+          required: true
+  - type: checkboxes
+    id: read-code-of-conduct
+    attributes:
+      label: "🏢 Have you read the Code of Conduct?"
+      options:
+        - label: "I have read the [Code of Conduct](https://github.com/drph4nt0m/avbot-charts/blob/HEAD/CODE_OF_CONDUCT.md)"
+          required: true

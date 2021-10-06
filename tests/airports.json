@@ -1,0 +1,90 @@
+[
+  {
+    "iso": "AE",
+    "ident": "AE-0002"
+  },
+  {
+    "iso": "AL",
+    "ident": "AL-0001"
+  },
+  {
+    "iso": "AT",
+    "ident": "AT-0001"
+  },
+  {
+    "iso": "AU",
+    "ident": "AGY"
+  },
+  {
+    "iso": "BE",
+    "ident": "BE-0001"
+  },
+  {
+    "iso": "BZ",
+    "ident": "BZ-0001"
+  },
+  {
+    "iso": "CR",
+    "ident": "CR-0001"
+  },
+  {
+    "iso": "EE",
+    "ident": "EE-0001"
+  },
+  {
+    "iso": "FR",
+    "ident": "FR-0001"
+  },
+  {
+    "iso": "GB",
+    "ident": "ABE"
+  },
+  {
+    "iso": "GT",
+    "ident": "EMR"
+  },
+  {
+    "iso": "HN",
+    "ident": "HN-0001"
+  },
+  {
+    "iso": "HU",
+    "ident": "HU-0001"
+  },
+  {
+    "iso": "IN",
+    "ident": "IN-0001"
+  },
+  {
+    "iso": "KZ",
+    "ident": "HRC"
+  },
+  {
+    "iso": "LK",
+    "ident": "AFK"
+  },
+  {
+    "iso": "NI",
+    "ident": "MNAL"
+  },
+  {
+    "iso": "NL",
+    "ident": "EH58"
+  },
+  {
+    "iso": "SV",
+    "ident": "MSAC"
+  },
+  {
+    "iso": "TH",
+    "ident": "PMM"
+  },
+  {
+    "iso": "US",
+    "ident": "00A"
+  },
+  {
+    "iso": "VE",
+    "ident": "SV02"
+  }
+]

@@ -1,14 +1,10 @@
 const fs = require('fs');
 const getAirport = require('../app/getAirport');
+const airports = require('./airports.json');
 
-test('IN', async () => {
-  const icao = 'VABB';
-  const airport = getAirport(icao);
-  expect(airport).toMatchObject({ ident: 'VABB' });
-});
-
-test('US', async () => {
-  const icao = 'KJFK';
-  const airport = getAirport(icao);
-  expect(airport).toMatchObject({ ident: 'KJFK' });
+describe.each(airports)('$iso', ({ ident }) => {
+  test(ident, async () => {
+    const airport = getAirport(ident);
+    expect(airport).toMatchObject({ ident });
+  });
 });

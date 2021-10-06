@@ -48,4 +48,15 @@ const logger = createLogger({
   ]
 });
 
+logger.flushLogs = () =>
+  new Promise((resolve, reject) => {
+    logger.on('finish', () => {
+      // This should work without a timeout but this is currently an open bug in winston
+      // https://github.com/winstonjs/winston#awaiting-logs-to-be-written-in-winston
+      // https://github.com/winstonjs/winston/issues/1504
+      setTimeout(() => resolve(), 100);
+    });
+    logger.end();
+  });
+
 module.exports = logger;

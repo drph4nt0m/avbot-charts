@@ -29,7 +29,7 @@ body:
       label: Steps to add a new playbook
       value: https://github.com/drph4nt0m/avbot-charts/wiki/Playbooks
     validations:
-      required: false
+      required: true
   - type: checkboxes
     id: no-duplicate-issues
     attributes:

@@ -1,6 +1,5 @@
 const util = require('util');
 const { arrayIndexString } = require('./utils');
-const axiosEngine = require('./engines/axios');
 const saveLink = require('./saveLink');
 const getChart = require('./getChart');
 const logger = require('./logger');

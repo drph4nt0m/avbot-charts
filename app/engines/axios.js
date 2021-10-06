@@ -22,7 +22,8 @@ module.exports = async (features, icao) => {
       headers: {
         'User-Agent':
           'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36 Edg/89.0.774.45',
-        'connection': 'keep-alive'
+        'connection': 'keep-alive',
+        ...(features.headers ? features.headers : {}),
       }
     });
 

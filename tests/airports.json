@@ -1,112 +1,90 @@
 [
   {
     "iso": "AE",
-    "ident": "AE-0002",
     "chartIdent": { "valid": "OMDB", "invalid": "OMAM" }
   },
   {
     "iso": "AL",
-    "ident": "AL-0001",
     "chartIdent": { "valid": "LAKU", "invalid": "AL-0001" }
   },
   {
     "iso": "AT",
-    "ident": "AT-0001",
     "chartIdent": { "valid": "LOWG", "invalid": "AT-0001" }
   },
   {
     "iso": "AU",
-    "ident": "AGY",
     "chartIdent": { "valid": "YSSY", "invalid": "YYBK" }
   },
   {
     "iso": "BE",
-    "ident": "BE-0001",
     "chartIdent": { "valid": "EBAW", "invalid": "BE-0001" }
   },
   {
     "iso": "BZ",
-    "ident": "BZ-0001",
     "chartIdent": { "valid": "MZBZ", "invalid": "BZ-0001" }
   },
   {
     "iso": "CR",
-    "ident": "CR-0001",
     "chartIdent": { "valid": "MROC", "invalid": "CR-0001" }
   },
   {
     "iso": "EE",
-    "ident": "EE-0001",
     "chartIdent": { "valid": "EEEI", "invalid": "ECEL" }
   },
   {
     "iso": "FR",
-    "ident": "FR-0001",
     "chartIdent": { "valid": "LFPG", "invalid": "LFSJ" }
   },
   {
     "iso": "GB",
-    "ident": "ABE",
     "chartIdent": { "valid": "EGLL", "invalid": "EHHA" }
   },
   {
     "iso": "GT",
-    "ident": "EMR",
     "chartIdent": { "valid": "MGGT", "invalid": "GT-0001" }
   },
   {
     "iso": "HN",
-    "ident": "HN-0001",
     "chartIdent": { "valid": "MHTG", "invalid": "MHMI" }
   },
   {
     "iso": "HU",
-    "ident": "HU-0001",
     "chartIdent": { "valid": "LHBC", "invalid": "LBSC" }
   },
   {
     "iso": "IN",
-    "ident": "IN-0001",
     "chartIdent": { "valid": "VABB", "invalid": "IN-0030" }
   },
   {
     "iso": "KZ",
-    "ident": "HRC",
     "chartIdent": { "valid": "UATE", "invalid": "KZ-0095" }
   },
   {
     "iso": "LK",
-    "ident": "AFK",
     "chartIdent": { "valid": "VCCA", "invalid": "LK-0001" }
   },
   {
     "iso": "NI",
-    "ident": "MNAL",
     "chartIdent": { "valid": "MNMG", "invalid": "MNAL" }
   },
   {
     "iso": "NL",
-    "ident": "EH58",
     "chartIdent": { "valid": "EHAM", "invalid": "EHHA" }
   },
   {
     "iso": "SV",
-    "ident": "MSAC",
     "chartIdent": { "valid": "MSLP", "invalid": "MSAC" }
   },
   {
     "iso": "TH",
-    "ident": "PMM",
     "chartIdent": { "valid": "VTBU", "invalid": "TH-0001" }
   },
   {
     "iso": "US",
-    "ident": "00A",
     "chartIdent": { "valid": "KJFK", "invalid": "" }
   },
   {
     "iso": "VE",
-    "ident": "SV02",
     "chartIdent": { "valid": "SVAC", "invalid": "VE-0030" }
   }
 ]

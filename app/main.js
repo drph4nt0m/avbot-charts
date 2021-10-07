@@ -8,11 +8,12 @@ const getAirport = require('./getAirport');
 const getCharts = require('./getCharts');
 
 commander.program
-  .option('--icao <ICAO_CODE>', 'Scrape only one specific airport by airport ICAO code')
-  .option('--country <ISO_CODES>', 'Scrape all airports in specific countries by country ISO code')
-  .option('--all', 'Scrape all airports in all the countries')
-  .option('--skip-country <ISO_CODES>', 'Skip scraping for all airports in specific countries by country ISO code')
-  .option('--prod', 'Run the command but dont publish to database')
+  .option('-i, --icao <ICAO_CODE>', 'Scrape only one specific airport by airport ICAO code')
+  .option('-c, --country <ISO_CODES>', 'Scrape all airports in specific countries by country ISO code')
+  .option('-sc, --skip-country <ISO_CODES>', 'Skip scraping for all airports in specific countries by country ISO code')
+  .option('-a, --all', 'Scrape all airports in all the countries')
+  .option('-p, --prod', 'Run the command but dont publish to database')
+  .option('-cm, --completed-map', 'World map link of implemented playbooks')
   .parse(process.argv);
 
 const options = commander.program.opts();
@@ -91,6 +92,9 @@ async function main() {
     }
 
     logger.debug('Updated links', { type: 'general' });
+  } else if (options.completedMap) {
+    const playbooks = fs.readdirSync(playbooksDir);
+    logger.info(`https://www.amcharts.com/visited_countries/#${playbooks.map(p => p.split('.')[0]).join(',')}`);
   }
 
   await logger.flushLogs();

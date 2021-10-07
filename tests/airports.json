@@ -72,6 +72,10 @@
     "chartIdent": { "valid": "EHAM", "invalid": "EHHA" }
   },
   {
+    "iso": "SG",
+    "chartIdent": { "valid": "WSSS", "invalid": "SG-0001" }
+  },
+  {
     "iso": "SV",
     "chartIdent": { "valid": "MSLP", "invalid": "MSAC" }
   },

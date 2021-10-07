@@ -94,7 +94,7 @@ async function main() {
     logger.debug('Updated links', { type: 'general' });
   } else if (options.completedMap) {
     const playbooks = fs.readdirSync(playbooksDir);
-    logger.info(`https://www.amcharts.com/visited_countries/#${playbooks.map(p => p.split('.')[0]).join(',')}`);
+    logger.info(`https://www.amcharts.com/visited_countries/#${playbooks.map((p) => p.split('.')[0]).join(',')}`);
   }
 
   await logger.flushLogs();

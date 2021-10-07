@@ -7,7 +7,7 @@
   "scraper": {
     "engine": "axios",
     "features": {
-      "baseUrl": "https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_09_SEP_2021/FRANCE/AIRAC-2021-09-09/html",
+      "baseUrl": "https://www.sia.aviation-civile.gouv.fr/dvd/eAIP_07_OCT_2021/FRANCE/AIRAC-2021-10-07/html",
       "paths": [
         {
           "route": "/index-fr-FR.html",

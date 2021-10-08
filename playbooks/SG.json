@@ -7,7 +7,7 @@
   "scraper": {
     "engine": "axios",
     "features": {
-      "baseUrl": "https://aim-sg.caas.gov.sg/aip/2021-10-07-Non-AIRAC/final/2021-10-07-Non-AIRAC/html",
+      "baseUrl": "https://aim-sg.caas.gov.sg/aip/2021-10-08/final/2021-10-08/html",
       "paths": [
         {
           "route": "/index-en-GB.html",

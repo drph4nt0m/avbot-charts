@@ -44,6 +44,10 @@
     "chartIdent": { "valid": "MGGT", "invalid": "GT-0001" }
   },
   {
+    "iso": "HR",
+    "chartIdent": { "valid": "LDDU", "invalid": "HR-0001" }
+  },
+  {
     "iso": "HN",
     "chartIdent": { "valid": "MHTG", "invalid": "MHMI" }
   },

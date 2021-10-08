@@ -1,0 +1,33 @@
+{
+  "country": {
+    "iso": "HR",
+    "name": "Croatia"
+  },
+  "source": "Croatia Control",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://www.crocontrol.hr/UserDocsImages/AIS%20produkti/eAIP/2021-10-07-AIRAC/html",
+      "paths": [
+        {
+          "route": "/index-en-HR.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAISNavigationBase\"]",
+              "attribute": "src"
+            },
+            {
+              "selector": "frame[name=\"eAISNavigation\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[id=\"AD-2.${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

@@ -14,6 +14,7 @@ commander.program
   .option('-a, --all', 'Scrape all airports in all the countries')
   .option('-p, --prod', 'Run the command but dont publish to database')
   .option('-cm, --completed-map', 'World map link of implemented playbooks')
+  .option('--all, --skip-icao <ICAO_CODE>','Skip specific ICAO Codes')
   .parse(process.argv);
 
 const options = commander.program.opts();
@@ -78,12 +79,21 @@ async function main() {
     if (options.skipCountry) {
       skipList = options.skipCountry.split(',');
     }
+    if(options.skipIcao) {
+      skipList = options.skipIcao.split(',');
+    }
     const playbooks = fs.readdirSync(playbooksDir);
 
     for (let i = 0; i < playbooks.length; i += 1) {
       const country = playbooks[i];
       const isoCode = country.slice(0, -5); // Remove .json from FILE to get isoCode
       if (!skipList.includes(isoCode)) {
+        const fsPlaybook = fs.readFileSync(`${playbooksDir}/${country}`, 'utf8');
+        const playbook = JSON.parse(fsPlaybook);
+        const airports = getAirportsByCountry(playbook.country.iso);
+        await getCharts(playbook, airports, prodMode);
+      }
+      if (!skipList.includes(icaoCode)) {
         const fsPlaybook = fs.readFileSync(`${playbooksDir}/${country}`, 'utf8');
         const playbook = JSON.parse(fsPlaybook);
         const airports = getAirportsByCountry(playbook.country.iso);

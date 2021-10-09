@@ -20,7 +20,7 @@
         }
       ],
       "chart": {
-        "baseUrl": "${baseUrl}",
+        "baseUrl": "${baseUrl}/",
         "selector": "a[id=\"AD-2.${icao}\"]",
         "attribute": "href"
       }

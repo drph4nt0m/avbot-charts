@@ -1,0 +1,23 @@
+{
+  "country": {
+    "iso": "NP",
+    "name": "Nepal"
+  },
+  "source": "Civil Aviation Authority of Nepal",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://e-aip.caanepal.gov.np/welcome/listall",
+      "paths": [
+        {
+          "route": "/1"
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/",
+        "xpath": "//a[contains(text(),'${icao}')]",
+        "attribute": "href"
+      }
+    }
+  }
+}

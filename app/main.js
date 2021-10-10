@@ -16,7 +16,7 @@ commander.program
   .option('-c, --country <ISO_CODES...>', 'Scrape all airports in specific countries by country ISO code', commaSeparatedList, [])
   .option('-sc, --skip-country <ISO_CODES>', 'Skip scraping for all airports in specific countries by country ISO code')
   .option('-a, --all', 'Scrape all airports in all the countries')
-  .option('-p, --prod', 'Run the command but dont publish to database')
+  .option('-p, --prod', 'Run in production mode')
   .option('-cm, --completed-map', 'World map link of implemented playbooks')
   .parse(process.argv);
 

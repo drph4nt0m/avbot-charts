@@ -4,15 +4,19 @@ const fs = require('fs');
 
 const logger = require('./logger');
 const getAirportsByCountry = require('./getAirportsByCountry');
-const getAirport = require('./getAirport');
+const getAirports = require('./getAirports');
 const getCharts = require('./getCharts');
 
+function commaSeparatedList(value, previous) {
+  return previous.concat([value.split(',')[0]]);
+}
+
 commander.program
-  .option('-i, --icao <ICAO_CODE>', 'Scrape only one specific airport by airport ICAO code')
-  .option('-c, --country <ISO_CODES>', 'Scrape all airports in specific countries by country ISO code')
+  .option('-i, --icao <ICAO_CODES...>', 'Scrape multiple airports by airports ICAO codes', commaSeparatedList, [])
+  .option('-c, --country <ISO_CODES...>', 'Scrape all airports in specific countries by country ISO code', commaSeparatedList, [])
   .option('-sc, --skip-country <ISO_CODES>', 'Skip scraping for all airports in specific countries by country ISO code')
   .option('-a, --all', 'Scrape all airports in all the countries')
-  .option('-p, --prod', 'Run the command but dont publish to database')
+  .option('-p, --prod', 'Run in production mode')
   .option('-cm, --completed-map', 'World map link of implemented playbooks')
   .option('--all, --skip-icao <ICAO_CODE>','Skip specific ICAO Codes')
   .parse(process.argv);
@@ -31,33 +35,37 @@ async function main() {
     logger.debug('Running in production mode', { type: 'general' });
   }
 
-  if (options.icao) {
+  if (options.icao.length > 0) {
     logger.debug('Updating links', { type: 'general' });
 
-    const airport = getAirport(options.icao);
+    const airports = getAirports(options.icao);
+
     let playbook = null;
-    if (airport) {
-      try {
-        const fsPlaybook = fs.readFileSync(`${playbooksDir}/${airport.iso_country}.json`, 'utf8');
-        playbook = JSON.parse(fsPlaybook);
-      } catch (error) {
-        logger.error(`Playbook for ${airport.iso_country} not found`, { type: 'general' });
-        logger.error(error);
-      }
-      if (playbook) {
-        await getCharts(playbook, [airport], prodMode);
+    if (airports.length === options.icao.length) {
+      for (let i = 0; i < airports.length; i += 1) {
+        try {
+          const fsPlaybook = fs.readFileSync(`${playbooksDir}/${airports[i].iso_country}.json`, 'utf8');
+          playbook = JSON.parse(fsPlaybook);
+        } catch (error) {
+          logger.error(`Playbook for ${airports[i].iso_country} not found`, { type: 'general' });
+          logger.error(error);
+        }
+        if (playbook) {
+          await getCharts(playbook, [airports[i]], prodMode);
+        }
       }
     } else {
-      logger.error(`No airport with icao code ${options.icao} found`, { type: 'general' });
+      logger.error(
+        `No airport with icao codes ${options.icao.filter((icao) => !airports.find((airport) => airport.ident === icao)).join(', ')} found`,
+        { type: 'general' }
+      );
     }
     logger.debug('Updated links', { type: 'general' });
   } else if (options.country) {
     logger.debug('Updating links', { type: 'general' });
 
-    const countries = options.country.split(',');
-
-    for (let i = 0; i < countries.length; i += 1) {
-      const country = countries[i];
+    for (let i = 0; i < options.country.length; i += 1) {
+      const country = options.country[i];
       const airports = getAirportsByCountry(country);
       let playbook = null;
       try {

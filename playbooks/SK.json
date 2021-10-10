@@ -1,0 +1,29 @@
+{
+  "country": {
+    "iso": "SK",
+    "name": "Slovakia"
+  },
+  "source": "Aeronautical Information Services of the Slovak Republic",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://aim.lps.sk/eAIP/eAIP_SR/AIP_SR_valid/html",
+      "paths": [
+        {
+          "route": "/LZ-frameset-en-SK.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAIPNavigation\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/",
+        "selector": "a[id=\"AD-2.${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

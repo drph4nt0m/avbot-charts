@@ -14,8 +14,8 @@
         }
       ],
       "chart": {
-        "baseUrl": "${baseUrl}/",
-        "xpath": "//a[contains(text(),'${icao}')]",
+        "baseUrl": "",
+        "xpath": "//h5/a[contains(text(),'${icao}')]",
         "attribute": "href"
       }
     }

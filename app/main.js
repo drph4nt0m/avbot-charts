@@ -14,7 +14,7 @@ function commaSeparatedList(value, previous) {
 commander.program
   .option('-i, --icao <ICAO_CODES...>', 'Scrape multiple airports by airports ICAO codes', commaSeparatedList, [])
   .option('-c, --country <ISO_CODES...>', 'Scrape all airports in specific countries by country ISO code', commaSeparatedList, [])
-  .option('-sc, --skip-country <ISO_CODES>', 'Skip scraping for all airports in specific countries by country ISO code')
+  .option('-sc, --skip-countries <ISO_CODES...>', 'Skip scraping for all airports in specific countries by country ISO code', commaSeparatedList, [])
   .option('-a, --all', 'Scrape all airports in all the countries')
   .option('-p, --prod', 'Run in production mode')
   .option('-cm, --completed-map', 'World map link of implemented playbooks')
@@ -60,7 +60,7 @@ async function main() {
       );
     }
     logger.debug('Updated links', { type: 'general' });
-  } else if (options.country) {
+  } else if (options.country.length > 0) {
     logger.debug('Updating links', { type: 'general' });
 
     for (let i = 0; i < options.country.length; i += 1) {
@@ -82,16 +82,12 @@ async function main() {
     logger.debug('Updated links', { type: 'general' });
   } else if (options.all) {
     logger.debug('Updating links', { type: 'general' });
-    let skipList = [];
-    if (options.skipCountry) {
-      skipList = options.skipCountry.split(',');
-    }
     const playbooks = fs.readdirSync(playbooksDir);
 
     for (let i = 0; i < playbooks.length; i += 1) {
       const country = playbooks[i];
       const isoCode = country.slice(0, -5); // Remove .json from FILE to get isoCode
-      if (!skipList.includes(isoCode)) {
+      if (!options.skipCountries.includes(isoCode)) {
         const fsPlaybook = fs.readFileSync(`${playbooksDir}/${country}`, 'utf8');
         const playbook = JSON.parse(fsPlaybook);
         const airports = getAirportsByCountry(playbook.country.iso);

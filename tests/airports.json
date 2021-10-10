@@ -88,6 +88,10 @@
     "chartIdent": { "valid": "WSSS", "invalid": "SG-0001" }
   },
   {
+    "iso": "SK",
+    "chartIdent": { "valid": "LZKZ", "invalid": "XAXA" }
+  },
+  {
     "iso": "SV",
     "chartIdent": { "valid": "MSLP", "invalid": "MSAC" }
   },

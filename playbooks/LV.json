@@ -1,0 +1,29 @@
+{
+  "country": {
+    "iso": "LV",
+    "name": "Latvia"
+  },
+  "source": "Latvijas Gaisa Satiksme",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://ais.lgs.lv/eAIPfiles/2021_006_09-SEP-2021/data/2021-09-09-AIRAC/html",
+      "paths": [
+        {
+          "route": "/index-en-GB.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAISNavigation\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[id=\"AD-2.${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

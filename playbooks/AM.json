@@ -1,0 +1,33 @@
+{
+  "country": {
+    "iso": "AM",
+    "name": "Armenia"
+  },
+  "source": "Republic Of Armenia",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "http://www.armats.am/storage/attachments/163057053003-21_with_new_AICs(01OCT2021)/html",
+      "paths": [
+        {
+          "route": "/index-en-GB.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAISNavigationBase\"]",
+              "attribute": "src"
+            },
+            {
+              "selector": "frame[name=\"eAISNavigation\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[id=\"UD-AD-2.${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

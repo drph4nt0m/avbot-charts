@@ -12,6 +12,10 @@
     "chartIdent": { "valid": "LOWG", "invalid": "AT-0001" }
   },
   {
+    "iso": "AM",
+    "chartIdent": { "valid": "UDYZ", "invalid": "AM-0001" }
+  },
+  {
     "iso": "AU",
     "chartIdent": { "valid": "YSSY", "invalid": "YYBK" }
   },

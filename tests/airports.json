@@ -68,6 +68,10 @@
     "chartIdent": { "valid": "VCCA", "invalid": "LK-0001" }
   },
   {
+    "iso": "LV",
+    "chartIdent": { "valid": "EVRA", "invalid": "EVTE" }
+  },
+  {
     "iso": "NI",
     "chartIdent": { "valid": "MNMG", "invalid": "MNAL" }
   },

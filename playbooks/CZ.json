@@ -1,0 +1,29 @@
+{
+  "country": {
+    "iso": "CZ",
+    "name": "Czech Republic"
+  },
+  "source": "Aeronautical Information Publication",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://aim.rlp.cz/ais_data/www_main_control/",
+      "paths": [
+        {
+          "route": "/frm_en_aip.htm",
+          "navigations": [
+            {
+              "selector": "frame[name=\"levy\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "search": {
+        "selector": "#a2 span",
+        "regex": "${icao}",
+        "text": "${icao}"
+      }
+    }
+  }
+}

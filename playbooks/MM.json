@@ -1,0 +1,33 @@
+{
+  "country": {
+    "iso": "MM",
+    "name": "Burma"
+  },
+  "source": "Myanmar Consult Notam for Latest Information Department of Civil Aviation",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://www.ais.gov.mm/eAIP/2021-01-01/html",
+      "paths": [
+        {
+          "route": "/index-en-GB.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAISNavigationBase\"]",
+              "attribute": "src"
+            },
+            {
+              "selector": "frame[name=\"eAISNavigation\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[id=\"AD-2.${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

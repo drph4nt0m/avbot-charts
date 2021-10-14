@@ -3,7 +3,7 @@
     "iso": "MM",
     "name": "Burma"
   },
-  "source": "Myanmar Consult Notam for Latest Information Department of Civil Aviation",
+  "source": "Department of Civil Aviation",
   "scraper": {
     "engine": "axios",
     "features": {

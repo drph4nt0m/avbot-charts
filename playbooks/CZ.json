@@ -3,7 +3,7 @@
     "iso": "CZ",
     "name": "Czech Republic"
   },
-  "source": "Aeronautical Information Publication",
+  "source": "Air Navigation Services of the Czech Republic",
   "scraper": {
     "engine": "axios",
     "features": {

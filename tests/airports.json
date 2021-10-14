@@ -24,6 +24,10 @@
     "chartIdent": { "valid": "MZBZ", "invalid": "BZ-0001" }
   },
   {
+    "iso": "CZ",
+    "chartIdent": { "valid": "LKPR", "invalid": "LKKC" }
+  },
+  {
     "iso": "CR",
     "chartIdent": { "valid": "MROC", "invalid": "CR-0001" }
   },

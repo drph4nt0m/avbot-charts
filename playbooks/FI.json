@@ -1,0 +1,29 @@
+{
+  "country": {
+    "iso": "FI",
+    "name": "Finland"
+  },
+  "source": "Air Navigation Services Finland",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://www.ais.fi/ais/aip/fi",
+      "paths": [
+        {
+          "route": "/index.htm",
+          "navigations": [
+            {
+              "selector": "frame[name=\"content\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/",
+        "xpath": "//area[contains(@title, '${icao}')]",
+        "attribute": "href"
+      }
+    }
+  }
+}

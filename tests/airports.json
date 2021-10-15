@@ -36,6 +36,10 @@
     "chartIdent": { "valid": "EEEI", "invalid": "ECEL" }
   },
   {
+    "iso": "FI",
+    "chartIdent": { "valid": "EFET", "invalid": "EFTO" }
+  },
+  {
     "iso": "FR",
     "chartIdent": { "valid": "LFPG", "invalid": "LFSJ" }
   },

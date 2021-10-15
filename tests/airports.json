@@ -68,6 +68,10 @@
     "chartIdent": { "valid": "VABB", "invalid": "IN-0030" }
   },
   {
+    "iso": "KR",
+    "chartIdent": { "valid": "RKPC", "invalid": "RKNS" }
+  },
+  {
     "iso": "KZ",
     "chartIdent": { "valid": "UATE", "invalid": "KZ-0095" }
   },

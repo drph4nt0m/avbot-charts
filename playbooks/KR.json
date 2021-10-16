@@ -1,0 +1,33 @@
+{
+  "country": {
+    "iso": "KR",
+    "name": "South Korea"
+  },
+  "source": "Aeronautical Information Publication - Republic of Korea",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "http://aim.koca.go.kr/eaipPub/Package/2021-10-06-AIRAC/html",
+      "paths": [
+        {
+          "route": "/index-en-GB.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAISNavigationBase\"]",
+              "attribute": "src"
+            },
+            {
+              "selector": "frame[name=\"eAISNavigation\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[id=\"AD-2.${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

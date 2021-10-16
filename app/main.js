@@ -8,7 +8,7 @@ const getAirports = require('./getAirports');
 const getCharts = require('./getCharts');
 
 function commaSeparatedList(value, previous) {
-  return previous.concat([value.split(',')[0]]);
+  return previous;
 }
 
 commander.program
@@ -38,7 +38,7 @@ async function main() {
     logger.debug('Updating links', { type: 'general' });
 
     const airports = getAirports(options.icao);
-
+    
     let playbook = null;
     if (airports.length === options.icao.length) {
       for (let i = 0; i < airports.length; i += 1) {
@@ -65,6 +65,7 @@ async function main() {
 
     for (let i = 0; i < options.country.length; i += 1) {
       const country = options.country[i];
+      logger.info('Country,'+country);
       const airports = getAirportsByCountry(country);
       let playbook = null;
       try {

@@ -7,7 +7,7 @@
   "scraper": {
     "engine": "axios",
     "features": {
-      "baseUrl": "https://aim-sg.caas.gov.sg/aip/2021-10-08/final/2021-10-08/html",
+      "baseUrl": "https://aim-sg.caas.gov.sg/aip/2021-10-15/final/2021-10-15/html",
       "paths": [
         {
           "route": "/index-en-GB.html",

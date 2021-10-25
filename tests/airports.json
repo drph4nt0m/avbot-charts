@@ -20,6 +20,10 @@
     "chartIdent": { "valid": "EBAW", "invalid": "BE-0001" }
   },
   {
+    "iso": "BT",
+    "chartIdent": { "valid": "VQBT", "invalid": "BT-0001" }
+  },
+  {
     "iso": "BZ",
     "chartIdent": { "valid": "MZBZ", "invalid": "BZ-0001" }
   },

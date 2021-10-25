@@ -1,0 +1,23 @@
+{
+  "country": {
+    "iso": "BT",
+    "name": "Bhutan"
+  },
+  "source": "Department of Air Transport, Bhutan",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://www.doat.gov.bt",
+      "paths": [
+        {
+          "route": "/aip"
+        }
+      ],
+      "chart": {
+        "baseUrl": "",
+        "xpath": "//a[contains(text(),'${icao}')]",
+        "attribute": "href"
+      }
+    }
+  }
+}

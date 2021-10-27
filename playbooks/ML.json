@@ -25,7 +25,7 @@
       ],
       "chart": {
         "baseUrl": "${baseUrl}/eAIP/",
-        "selector": "a[id=\"_10AD-2.${icao}\"]",
+        "selector": "a[id=\"_10AD-2.ATLAS.${icao}\"]",
         "attribute": "href"
       }
     }

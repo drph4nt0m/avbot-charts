@@ -104,6 +104,10 @@
     "chartIdent": { "valid": "VNDH", "invalid": "NP-0001" }
   },
   {
+    "iso": "ML",
+    "chartIdent": { "valid": "GAGO", "invalid": "ML-0001" }
+  },
+  {
     "iso": "MM",
     "chartIdent": { "valid": "VYMD", "invalid": "VYLY" }
   },

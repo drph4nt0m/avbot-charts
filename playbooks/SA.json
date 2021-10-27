@@ -1,0 +1,33 @@
+{
+  "country": {
+    "iso": "SA",
+    "name": "Saudi Arabia"
+  },
+  "source": "General Authority of Civil Aviation",
+  "scraper": {
+    "engine": "axios",
+    "features": {
+      "baseUrl": "https://gaca.gov.sa/web/en-gb/content/open-data-library",
+      "paths": [
+        {
+          "route": "/index-en-GB.html",
+          "navigations": [
+            {
+              "selector": "frame[name=\"eAISNavigationBase\"]",
+              "attribute": "src"
+            },
+            {
+              "selector": "frame[name=\"eAISNavigation\"]",
+              "attribute": "src"
+            }
+          ]
+        }
+      ],
+      "chart": {
+        "baseUrl": "${baseUrl}/eAIP/",
+        "selector": "a[id=\"AD-2.${icao}\"]",
+        "attribute": "href"
+      }
+    }
+  }
+}

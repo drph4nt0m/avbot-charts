@@ -1,4 +1,5 @@
 {
+  "enabled": true,
   "country": {
     "iso": "TH",
     "name": "Thailand"

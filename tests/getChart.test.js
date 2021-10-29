@@ -6,19 +6,22 @@ const uriRegEx = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()
 
 jest.setTimeout(300000);
 
-async function getChartWrapper(country, icao) {
-  const _playbook = fs.readFileSync(`${playbooks_dir}/${country}.json`, 'utf8');
-  const playbook = JSON.parse(_playbook);
-  return await getChart(playbook, icao);
-}
-
 describe.each(airports)('$iso', ({ iso, chartIdent }) => {
-  test('Found', async () => {
-    expect(await getChartWrapper(iso, chartIdent.valid)).toMatch(uriRegEx);
-  });
-
-  chartIdent.invalid &&
-    test('Not Found', async () => {
-      expect(await getChartWrapper(iso, chartIdent.invalid)).toMatch('error');
+  const _playbook = fs.readFileSync(`${playbooks_dir}/${iso}.json`, 'utf8');
+  const playbook = JSON.parse(_playbook);
+  if (playbook.enabled === true) {
+    test('Found', async () => {
+      expect(await getChart(playbook, chartIdent.valid)).toMatch(uriRegEx);
     });
+
+    if (chartIdent.invalid) {
+      test('Not Found', async () => {
+        expect(await getChart(playbook, chartIdent.invalid)).toMatch('error');
+      });
+    }
+  } else {
+    test('Disabled', async () => {
+      expect('disabled').toMatch('disabled');
+    });
+  }
 });

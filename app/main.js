@@ -50,7 +50,11 @@ async function main() {
           logger.error(error);
         }
         if (playbook) {
-          await getCharts(playbook, [airports[i]], prodMode);
+          if (playbook.enabled === true) {
+            await getCharts(playbook, [airports[i]], prodMode);
+          } else {
+            logger.debug(`Playbook for ${airports[i].iso_country} is disabled`, { type: 'general' });
+          }
         }
       }
     } else {
@@ -75,7 +79,11 @@ async function main() {
         logger.error(error);
       }
       if (playbook) {
-        await getCharts(playbook, airports, prodMode);
+        if (playbook.enabled === true) {
+          await getCharts(playbook, airports, prodMode);
+        } else {
+          logger.debug(`Playbook for ${country} is disabled`, { type: 'general' });
+        }
       }
     }
 
@@ -90,8 +98,12 @@ async function main() {
       if (!options.skipCountries.includes(isoCode)) {
         const fsPlaybook = fs.readFileSync(`${playbooksDir}/${country}`, 'utf8');
         const playbook = JSON.parse(fsPlaybook);
-        const airports = getAirportsByCountry(playbook.country.iso);
-        await getCharts(playbook, airports, prodMode);
+        if (playbook.enabled === true) {
+          const airports = getAirportsByCountry(playbook.country.iso);
+          await getCharts(playbook, airports, prodMode);
+        } else {
+          logger.debug(`Playbook for ${country} is disabled`, { type: 'general' });
+        }
       }
     }
 

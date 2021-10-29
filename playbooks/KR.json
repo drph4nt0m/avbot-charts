@@ -1,4 +1,5 @@
 {
+  "enabled": false,
   "country": {
     "iso": "KR",
     "name": "South Korea"

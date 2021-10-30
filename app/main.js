@@ -18,9 +18,29 @@ commander.program
   .option('-a, --all', 'Scrape all airports in all the countries')
   .option('-p, --prod', 'Run in production mode')
   .option('-cm, --completed-map', 'World map link of implemented playbooks')
+  .option('-ld,--list-disabled', 'List out all disabled playbooks')
   .parse(process.argv);
 
 const options = commander.program.opts();
+
+//Function to list out all disabled playbooks (enable: false)
+const listDisabled = (playbooksDir) => {
+  let disabledPlaybooks = [];
+  try {
+    if (options.listDisabled) {
+      const files = fs.readdirSync(playbooksDir);
+      files.forEach((file) => {
+        const fsPlaybook = JSON.parse(fs.readFileSync(`${playbooksDir}/${file}`, 'utf8'));
+        if (fsPlaybook.enabled === false) {
+          disabledPlaybooks.push(file);
+        }
+      });
+    }
+    logger.info(`https://www.amcharts.com/visited_countries/#${disabledPlaybooks.map((p) => p.split('.')[0]).join(',')}`);
+  } catch (error) {
+    logger.error(error);
+  }
+};
 
 async function main() {
   logger.debug(process.argv.join(' '), { type: 'general' });
@@ -28,6 +48,9 @@ async function main() {
   const playbooksDir = `${process.cwd()}/playbooks`;
 
   let prodMode = false;
+
+  //List disabled playbooks
+  await listDisabled(playbooksDir);
 
   if (options.prod) {
     prodMode = true;

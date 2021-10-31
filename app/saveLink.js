@@ -25,11 +25,21 @@ const ChartSchema = new mongoose.Schema(
 const model = mongoose.model('chart', ChartSchema);
 
 module.exports = async (airport) => {
-  try {
-    await model.updateOne({ icao: airport.icao }, airport, { upsert: true });
-    logger.info(`(${airport.icao}) Updated chart`, { type: 'database' });
-  } catch (error) {
-    logger.error(`(${airport.icao}) unable to update chart`, { type: 'database' });
-    logger.error(error);
+  if (airport.delete === true) {
+    try {
+      await model.deleteOne({ icao: airport.icao });
+      logger.debug(`(${airport.icao}) Deleted chart`, { type: 'database' });
+    } catch (error) {
+      logger.error(`(${airport.icao}) unable to delete chart`, { type: 'database' });
+      logger.error(error, { type: 'database' });
+    }
+  } else {
+    try {
+      await model.updateOne({ icao: airport.icao }, airport, { upsert: true });
+      logger.info(`(${airport.icao}) Updated chart`, { type: 'database' });
+    } catch (error) {
+      logger.error(`(${airport.icao}) unable to update chart`, { type: 'database' });
+      logger.error(error, { type: 'database' });
+    }
   }
 };

@@ -19,6 +19,9 @@ module.exports = async (playbook, airports, prodMode = false) => {
       }
     } else {
       logger.error(`${arrayIndexString(i, airports)} (${airport.ident}) ${res}`, { type: 'web' });
+      if (prodMode) {
+        await saveLink({ icao: airport.ident, delete: true });
+      }
     }
 
     if (i % 10 === 0) {

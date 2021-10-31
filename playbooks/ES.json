@@ -15,7 +15,7 @@
           }
         ],
         "chart": {
-          "baseUrl": "${baseUrl}/eAIP/",
+          "baseUrl": "${baseUrl}",
           "selector": "a['#{icao}']",
           "attribute": "href"
         }

@@ -120,6 +120,10 @@
     "chartIdent": { "valid": "LZKZ", "invalid": "XAXA" }
   },
   {
+    "iso": "ES",
+    "chartIdent": { "valid": "LEMD", "invalid": "" }
+  },
+  {
     "iso": "SV",
     "chartIdent": { "valid": "MSLP", "invalid": "MSAC" }
   },

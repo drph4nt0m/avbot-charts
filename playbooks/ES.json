@@ -1,0 +1,24 @@
+{
+    "enabled": true,
+    "country": {
+      "iso": "ES",
+      "name": "Spain"
+    },
+    "source": "ENAIRE",
+    "scraper": {
+      "engine": "axios",
+      "features": {
+        "baseUrl": "https://aip.enaire.es/AIP/",
+        "paths": [
+          {
+            "route": "AIP-en.html"
+          }
+        ],
+        "chart": {
+          "baseUrl": "${baseUrl}/eAIP/",
+          "selector": "a['#{icao}']",
+          "attribute": "href"
+        }
+      }
+    }
+  }

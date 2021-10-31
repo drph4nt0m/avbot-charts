@@ -11,7 +11,9 @@ module.exports = (countryCode) => {
   const res = [];
   parsed.forEach((row) => {
     if (row.iso_country === countryCode) {
-      res.push(row);
+      if (row.type !== 'heliport' && row.type !== 'closed') {
+        res.push(row);
+      }
     }
   });
   return res;

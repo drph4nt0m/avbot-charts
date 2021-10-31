@@ -24,23 +24,7 @@ commander.program
 const options = commander.program.opts();
 
 //Function to list out all disabled playbooks (enable: false)
-const listDisabled = (playbooksDir) => {
-  let disabledPlaybooks = [];
-  try {
-    if (options.listDisabled) {
-      const files = fs.readdirSync(playbooksDir);
-      files.forEach((file) => {
-        const fsPlaybook = JSON.parse(fs.readFileSync(`${playbooksDir}/${file}`, 'utf8'));
-        if (fsPlaybook.enabled === false) {
-          disabledPlaybooks.push(file);
-        }
-      });
-    }
-    logger.info(`https://www.amcharts.com/visited_countries/#${disabledPlaybooks.map((p) => p.split('.')[0]).join(',')}`);
-  } catch (error) {
-    logger.error(error);
-  }
-};
+const listDisabled = (playbooksDir) => {};
 
 async function main() {
   logger.debug(process.argv.join(' '), { type: 'general' });
@@ -50,7 +34,19 @@ async function main() {
   let prodMode = false;
 
   //List disabled playbooks
-  await listDisabled(playbooksDir);
+  if (options.listDisabled) {
+    try {
+      const files = fs.readdirSync(playbooksDir);
+      files.forEach((file) => {
+        const fsPlaybook = JSON.parse(fs.readFileSync(`${playbooksDir}/${file}`, 'utf8'));
+        if (fsPlaybook.enabled === false) {
+          console.log(file);
+        }
+      });
+    } catch (error) {
+      logger.error(error);
+    }
+  }
 
   if (options.prod) {
     prodMode = true;

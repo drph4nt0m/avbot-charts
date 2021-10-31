@@ -12,7 +12,9 @@ module.exports = (icaoCodes) => {
 
   parsed.forEach((row) => {
     if (icaoCodes.includes(row.ident)) {
-      airports.push(row);
+      if (row.type !== 'heliport' && row.type !== 'closed') {
+        airports.push(row);
+      }
     }
   });
 

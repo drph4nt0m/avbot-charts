@@ -37,10 +37,11 @@ async function main() {
   if (options.listDisabled) {
     try {
       const files = fs.readdirSync(playbooksDir);
+      logger.info(`Disabled playbooks:`, { type: 'general' });
       files.forEach((file) => {
         const fsPlaybook = JSON.parse(fs.readFileSync(`${playbooksDir}/${file}`, 'utf8'));
         if (fsPlaybook.enabled === false) {
-          console.log(file);
+          logger.info(`[${fsPlaybook.country.iso}] ${fsPlaybook.country.name}`, { type: 'general' });
         }
       });
     } catch (error) {

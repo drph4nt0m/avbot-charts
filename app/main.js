@@ -23,7 +23,6 @@ commander.program
 
 const options = commander.program.opts();
 
-//Function to list out all disabled playbooks (enable: false)
 const listDisabled = (playbooksDir) => {};
 
 async function main() {
@@ -33,7 +32,6 @@ async function main() {
 
   let prodMode = false;
 
-  //List disabled playbooks
   if (options.listDisabled) {
     try {
       const files = fs.readdirSync(playbooksDir);

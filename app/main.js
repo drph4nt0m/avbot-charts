@@ -18,6 +18,7 @@ commander.program
   .option('-a, --all', 'Scrape all airports in all the countries')
   .option('-p, --prod', 'Run in production mode')
   .option('-cm, --completed-map', 'World map link of implemented playbooks')
+  .option('-ld,--list-disabled', 'List out all disabled playbooks')
   .parse(process.argv);
 
 const options = commander.program.opts();
@@ -28,6 +29,21 @@ async function main() {
   const playbooksDir = `${process.cwd()}/playbooks`;
 
   let prodMode = false;
+
+  if (options.listDisabled) {
+    try {
+      const files = fs.readdirSync(playbooksDir);
+      logger.info(`Disabled playbooks:`, { type: 'general' });
+      files.forEach((file) => {
+        const fsPlaybook = JSON.parse(fs.readFileSync(`${playbooksDir}/${file}`, 'utf8'));
+        if (fsPlaybook.enabled === false) {
+          logger.info(`[${fsPlaybook.country.iso}] ${fsPlaybook.country.name}`, { type: 'general' });
+        }
+      });
+    } catch (error) {
+      logger.error(error);
+    }
+  }
 
   if (options.prod) {
     prodMode = true;

@@ -8,7 +8,7 @@
   "scraper": {
     "engine": "axios",
     "features": {
-      "baseUrl": "https://ais.avinor.no/no/AIP/View/109/2021-10-07-AIRAC/html",
+      "baseUrl": "https://ais.avinor.no/no/AIP/View/110/2021-11-04-AIRAC/html",
       "paths": [
         {
           "route": "/index-en-GB.html",

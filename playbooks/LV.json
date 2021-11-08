@@ -8,7 +8,7 @@
   "scraper": {
     "engine": "axios",
     "features": {
-      "baseUrl": "https://ais.lgs.lv/eAIPfiles/2021_006_09-SEP-2021/data/2021-09-09-AIRAC/html",
+      "baseUrl": "https://ais.lgs.lv/eAIPfiles/2021_007_04-NOV-2021-corrigenda/data/2021-11-04-AIRAC/html",
       "paths": [
         {
           "route": "/index-en-GB.html",
